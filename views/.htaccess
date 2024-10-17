@@ -1,0 +1,11 @@
+AllowOverride All
+# Permet d'utiliser les fichiers .htm et .html
+Options +MultiViews
+AddType application/x-httpd-php .html .htm
+
+# Redirige les requêtes vers un fichier index.php
+DirectoryIndex index.php
+
+# Active l'URL rewriting
+RewriteEngine On
+RewriteBase /

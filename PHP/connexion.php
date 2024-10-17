@@ -1,6 +1,4 @@
 <?php
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclure la connexion à la base de données
     include 'connexion.php'; 
@@ -9,17 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $cp = $_POST['cp'];
     $password = $_POST['password'];
-   
-    
-    // Exemple de requête de vérification
-    $sql = "SELECT * FROM table_utilisateur WHERE email = helene.leleux@sncf.fr  AND cp = 9112590P";
+
+    //  Requête de vérification
+    $sql = "SELECT * FROM table_utilisateur WHERE email = ? AND cp = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $email, $cp);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-     
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['mot_de_passe'])) {
             // Authentification réussie, démarrer une session
@@ -33,11 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Aucun utilisateur trouvé avec ces informations.";
     }
-    
+
     $stmt->close();
     $conn->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <!--HEAD-->
@@ -50,19 +47,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="/CSS/connexion.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="/JS/connexion.js"></script>
+
+    <!-- Validation JavaScript -->
     <script>
-      function showAlert() {
-          alert("Bienvenue sur votre page de connexion, SNCF Ticketing!");
+      function validateForm() {
+        // Récupérer les valeurs des champs du formulaire
+        var email = document.getElementById("email").value;
+        var cp = document.getElementById("cp").value;
+        var password = document.getElementById("password").value;
+        var errorMessage = "";
+
+        // Vérifier si tous les champs sont remplis
+        if (email === "" || cp === "" || password === "") {
+          errorMessage = "Tous les champs doivent être remplis.\n";
+        }
+
+        // Vérifier que l'email a un format valide
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(email)) {
+          errorMessage += "Veuillez entrer une adresse e-mail valide.\n";
+        }
+
+        // Vérifier que le CP est bien de 8 caractères
+        if (cp.length !== 8) {
+          errorMessage += "Le numéro de CP doit comporter 8 caractères.\n";
+        }
+
+        // Vérifier que le mot de passe a au moins 6 caractères
+        if (password.length < 6) {
+          errorMessage += "Le mot de passe doit comporter au moins 6 caractères.\n";
+        }
+
+        // Si un message d'erreur est présent, afficher une alerte et empêcher la soumission du formulaire
+        if (errorMessage !== "") {
+          alert(errorMessage);
+          return false; // Empêcher la soumission du formulaire
+        }
+
+        // Si tout est correct, permettre la soumission
+        return true;
       }
-     
+
+      function showAlert() {
+        alert("Bienvenue sur votre page de connexion, SNCF Ticketing!");
+      }
+
+      // Afficher l'alerte au chargement de la page
       window.onload = function() {
-          showAlert();  
+        showAlert();  
       };
-  </script>
+    </script>
 </head>
 
 <!--BODY-->
-
 <body>
   <section>
     <header class="header">
@@ -77,14 +114,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 
     <!--PREMIER BLOC-->
-
     <h2 class="titre2">
       <span style="color: #00205b; margin-right: 30px;">Je me connecte à mon espace</span>
       <span style="color:#82BE00;">SNCF Ticketing</span>          
     </h2>
 
     <!-- Formulaire de connexion -->
-    <form id="loginForm" method="POST" action="login.php"> 
+    <form id="loginForm" method="POST" action="login.php" onsubmit="return validateForm();"> 
         <h1 class="form-title">Je me connecte à mon compte</h1>
         <div class="inputs">                            
             <label for="email">E-mail *</label>
@@ -106,8 +142,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <a href="/version.html" class="footer-link">Version 1.1</a> |
           <a href="/HTML/cgu.html" class="footer-link">CGU</a> | 
           <a href="/HTML/mentions.html" class="footer-link">Mentions légales</a> | 
-          <a href="/HTML/page_contacts.html" class="footer-link"> Contactez-nous</a>|
-           e-SNCF ©2024 
+          <a href="/HTML/page_contacts.html" class="footer-link">Contactez-nous</a> |
+          e-SNCF ©2024 
         </h3>
       </div>
     </footer>
