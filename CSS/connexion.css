@@ -1,11 +1,11 @@
-body {
-  margin: 0;
-  background-color: #e6e6e6;
-  font-family: Arial, Helvetica, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+body{
+    margin: 0 auto;
+    background-color: #e6e6e6;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    }
      
     .presentation{
       flex-grow: 1;
@@ -45,59 +45,26 @@ body {
           font-size: 5em; 
          text-align: center;
          color: #e6e6e6;
-         margin-left: 300px;
         }
     
   
-        .header .logo_sncf {
-          max-width: 100%;
-          max-height: 2000px; 
-      }
-
-
-       .titre2 {
-        font-size: 5rem; 
-        margin-bottom: 120px;
-        white-space: nowrap; 
-        padding-top: 100px;
-      }
-/* Menu de navigation */
-.nav {
-  list-style-type: none;
-  padding: 1%;
-  margin-top: 200px;
-}
-
-.nav li {
-  display: inline;
-  margin: 0 50px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #e6e6e6;
-  font-weight: bold;
-  font-size: 2rem;
-  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
-
-.nav a:hover {
-  color: #82BE00;
-  text-decoration: none; }
-  
-
+       .logo_sncf{
+        height: 470px;
+        width: 450px;
+       }
   /*PREMIER BLOC*/
   
    .Bienvenue {
-    margin-top: 5;
+    margin-top: 0;
+    padding-top: 0;
     text-align: center; 
-    color: #00205b;
   
   }
    .titre2{
-    font-size: 5rem;
+    font-size: 6rem;
     display: flex;
     justify-content: center;
+    margin-left: 400px;
     margin-bottom: 500px;
    }
 
@@ -211,7 +178,6 @@ input, button {
 }
 
 
-
     /* FOOTER */
 .footer {
     height: 280px;
@@ -252,42 +218,3 @@ input, button {
                 text-decoration: underline; 
             }
         
-
-            /* Media Queries Responsive */
-
-@media (max-width: 768px) {
-  .header {
-      flex-direction: column; 
-      align-items: center;
-  }
-
-  .header h1 {
-      font-size: 3rem; 
-  }
-
-  .nav {
-      margin-top: 100px; 
-  }
-
-  .nav li {
-      display: block; 
-      margin: 10px 0; 
-  }
-
-  .titre2 {
-      font-size: 3rem; 
-      margin-bottom: 30px; 
-  }
-
-  .form-title {
-      font-size: 2.5rem; 
-  }
-
-  .inputs input, .submit-btn, .one-click-login {
-      font-size: 1.4rem; 
-  }
-
-  .footer h3 {
-      font-size: 1.2rem; 
-  }
-}

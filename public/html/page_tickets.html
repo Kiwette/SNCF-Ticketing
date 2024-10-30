@@ -1,27 +1,22 @@
 <?php
 // Inclure la configuration de la base de données et le fichier d'authentification
-include 'includes/config.php';
-include 'includes/auth.php'; // Assurez-vous que l'utilisateur est authentifié et autorisé
+include 'includes/database.php';
+include 'includes/auth.php'; // Authentification de l'utilisateur
 
 // Vérifier si l'utilisateur est un administrateur
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Administrateur') {
     header("Location: /HTML/page_creation_ticket.html");
     exit();
 }
-
-// Requête pour récupérer les tickets
-// $sql = "SELECT * FROM tickets"; // Supprimer cette ligne car nous allons utiliser l'API
-// $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNCF TICKETING</title>
-    <link rel="stylesheet" href="/CSS/gestion_tickets.css" />
+    <link rel="stylesheet" href="/CSS/page_tickets.css" />
     <script src="/JS/gestion_tickets.js"></script>
     <script>
         function showAlert() {
@@ -30,13 +25,11 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Administrateur
 
         async function fetchTickets() {
             try {
-                const response = await fetch('/api/tickets'); // Vérifie que cette URL est correcte
+                const response = await fetch('/api/tickets');
                 const tickets = await response.json();
-                const ticketList = document.querySelector('tbody'); // Sélectionne le <tbody> de la table
+                const ticketList = document.querySelector('#ticketTable tbody');
 
-                // Vide le tableau avant d'ajouter les nouveaux tickets
                 ticketList.innerHTML = '';
-
                 tickets.forEach(ticket => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -59,35 +52,82 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Administrateur
             }
         }
 
+        function toggleSection(section) {
+            document.getElementById('creationSection').style.display = section === 'creation' ? 'block' : 'none';
+            document.getElementById('ticketsSection').style.display = section === 'tickets' ? 'block' : 'none';
+        }
+
         window.onload = function() {
             showAlert();
-            fetchTickets(); // Appeler la fonction pour récupérer les tickets
+            fetchTickets();
         };
     </script>
 </head>
 
 <body>
     <section>
+        <!-- Header -->
         <header class="header">
             <img class="logo_sncf" src="/Images/logo.news.png" alt="logo_sncf"/>
             <div class="presentation">
                 <h1 class="titre_principal">SNCF TICKETING</h1>
             </div>
             <nav class="nav">
-                <li><a href="/HTML/page_creation_tickets.html">Créer un ticket</a></li>
-                <li><a href="get_tickets.php">Voir les Tickets</a></li> 
+                <li><a href="#" onclick="toggleSection('creation')">Créer un ticket</a></li>
+                <li><a href="#" onclick="toggleSection('tickets')">Voir les Tickets</a></li>
                 <li><a href="/HTML/Page_accueil.html">Se déconnecter</a></li>
             </nav>
-        </header>  
+        </header>
 
-        <div class="BlocGénéral">
-            <div class="Bienvenue">
-                <h2 class="titre2"> 
-                    <span style="color:#82be00;">Liste des tickets</span>         
-                </h2>
-                <ul id="ticketList"></ul>
+        <!-- Section de création de ticket -->
+        <div id="creationSection" class="BlocGénéral" style="display: none;">
+            <h2 class="titre2">Bienvenue sur la page de création de ticket</h2>
+            <div class="form-container">
+                <h1>Créer un Ticket d'incident</h1>
+                <form action="submit_ticket.php" method="POST">
+                    <label for="cp">Numéro de CP *</label>
+                    <input type="text" id="cp" name="cp" placeholder="Votre numéro de CP" required maxlength="8">
+
+                    <label for="role">Rôle*</label>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Quel est votre rôle ?</option>
+                        <option value="Utilisateur">Utilisateur</option>
+                        <option value="Administrateur">Administrateur</option>
+                        <option value="Support">Support technique</option>
+                    </select>
+
+                    <label for="subject">Sujet de l'incident *</label>
+                    <input type="text" id="subject" name="subject" placeholder="Sujet de l'incident" required>
+
+                    <label for="category">Catégorie *</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Choisir une catégorie</option>
+                        <option value="Power Apps">Power Apps</option>
+                        <option value="Power BI">Power BI</option>
+                        <option value="Power Automate">Power Automate</option>
+                    </select>
+
+                    <label for="priority">Priorité *</label>
+                    <select id="priority" name="priority" required>
+                        <option value="" disabled selected>Choisir une priorité</option>
+                        <option value="faible">Faible</option>
+                        <option value="moyenne">Moyenne</option>
+                        <option value="élevée">Élevée</option>
+                        <option value="haute">Haute</option>
+                    </select>
+
+                    <label for="description">Description brève et précise *</label>
+                    <textarea id="description" name="description" placeholder="Décrivez l'incident" required></textarea>
+
+                    <button type="submit">Créer le Ticket</button>
+                </form>
             </div>
-            <table>
+        </div>
+
+        <!-- Section de visualisation des tickets -->
+        <div id="ticketsSection" class="BlocGénéral">
+            <h2 class="titre2">Liste des tickets</h2>
+            <table id="ticketTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -109,6 +149,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Administrateur
             </table>
         </div>
 
+        <!-- Footer -->
         <footer class="footer">
             <img class="logo_sncf2" src="/Images/logo-removebg-preview.png" alt="logo_sncf2"/>
             <div class="contenu_footer">
@@ -116,7 +157,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Administrateur
                     <a href="/version.html" class="footer-link">Version 1.1</a> |
                     <a href="/cgu.html" class="footer-link">CGU</a> |
                     <a href="/mentions-legales.html" class="footer-link">Mentions légales</a> |
-                    <a href="/HTML/page_contacts.html" class="footer-link"> Contactez-nous</a>
+                    <a href="/HTML/page_contacts.html" class="footer-link">Contactez-nous</a>
                     e-SNCF ©2024
                 </h3>
             </div>
@@ -126,6 +167,5 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Administrateur
 </html>
 
 <?php
-// Fermer la connexion à la base de données
 mysqli_close($conn);
 ?>

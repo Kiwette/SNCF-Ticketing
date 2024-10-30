@@ -1,86 +1,84 @@
 body{
-  margin: 0 auto;
-  background-color: #e6e6e6;
-  overflow: hidden;
-  position: relative;
-  }
-   
-  .presentation{
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    color:#00205b;
-  font-size: 30px;
-    padding:  1px 800px;
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    text-align: center;
-      }
-  
-      h3{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-        font-size: 2rem;
+    margin: 0 auto;
+    background-color: #e6e6e6;
+    overflow: hidden;
+    position: relative;
     }
-    
-        /*HEADER*/
-  .header{
-      display : flex;
-     justify-content: space-between;
-     align-items: center;
-      height: 280px;
-      width: 100%;
-      border: solid;
-      background-color: #00205b;
-      border-color: #00205b;  
-      padding: 20px; }
-
-      
-      .header h1 {  
-        margin: 0; 
-        font-size: 5em; 
-       text-align: center;
-       color: #e6e6e6;
-      }
-  
-
-     .logo_sncf{
-      height: 470px;
-      width: 450px;
-     }
-
-     /* menu de navigation*/
-     .nav {
-        list-style-type: none;
-        padding: 1%;
-        margin-top: 200px;
-    }
-
-       .nav li {
-        display: inline;
-        margin: 0 50px }
-
-        .nav a {
-          text-decoration: none; 
-          color: #e6e6e6;
-          font-weight: bold;
-          font-size: 2rem;
-          font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+     
+    .presentation{
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      color:#00205b;
+    font-size: 30px;
+      padding:  1px 800px;
+      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+      text-align: center;
+      margin-left: 800px;
         }
-
-        .nav a:hover {
-          color: #82BE00; 
-          text-decoration: none;}
-            
-        .titre_principal {
-          margin: 0;
-          font-size: 24px;
+    
+        h3{
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          color: white;
+          text-align: center;
+          padding: 10px 0;
+          font-size: 2rem;
       }
-/*Bandeau Accueil*/
-.Bienvenue{
+      
+          /*HEADER*/
+    .header{
+        display : flex;
+       justify-content: space-between;
+       align-items: center;
+        height: 280px;
+        width: 100%;
+        border: solid;
+        background-color: #00205b;
+        border-color: #00205b;  
+        padding: 20px; }
+  
+        
+        .header h1 {  
+          margin: 0; 
+          font-size: 5em; 
+         text-align: center;
+         color: #e6e6e6;
+        }
+    
+  
+       .logo_sncf{
+        height: 470px;
+        width: 450px;
+       }
+  
+       /* menu de navigation*/
+       .nav {
+          list-style-type: none;
+          padding: 1%;
+          margin-top: 200px;
+      }
+  
+         .nav li {
+          display: inline;
+          margin: 0 50px }
+  
+          .nav a {
+            text-decoration: none; 
+            color: #e6e6e6;
+            font-weight: bold;
+            font-size: 2rem;
+            font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+          }
+  
+          .titre_principal {
+            margin: 0;
+            font-size: 24px;
+        }
+  /*Bandeau Accueil*/
+  
+  .Bienvenue{
   text-align: center;
   margin-top: 80px;
   }
@@ -103,27 +101,20 @@ body{
     width: 100%;
   }
   
-  .PremierBloc {
-    display: flex;
-    align-items: center;
-    width: 100%; 
-  }
-
+  
   /* TABLE */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
-    font-size: 2rem;
 }
 
 table, th, td {
     border: 1px solid #82be00;
-      padding: 8px 10px;  
 }
 
 th, td {
-    padding: 30px;
+    padding: 15px;
     text-align: left;
     vertical-align: top;
 }
@@ -138,92 +129,45 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.btn-success {
-  background-color: #82BE00; 
-  border: none; 
-  color: white; 
-  padding: 10px 20px; 
-  font-size: 3rem;
-  border-radius: 8px; 
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.3s ease; 
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.btn-success:hover {
-  background-color: #82BE00; 
-  transform: translateY(-2px); 
-}
-
-.btn-success:focus {
-  outline: none; 
-  box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5); 
-}
-
-
 
 /* FOOTER */
 .footer {
-  height: 280px;
-  background-color: #00205b;
-  color: white;
-  text-align: center;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  margin: 0; 
-  padding: 0; 
-  margin-top: 20px; 
-}     
+    height: 280px;
+    background-color: #00205b;
+    color: white;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    margin: 0; 
+    padding: 0; 
+    margin-top: 20px; 
+  }     
+              
+              .footer h3 {
+                  font-size: 2rem;
+                  color: white;
+                  margin: 0;
+                  padding: 10px 0;
+              }
+    
             
-            .footer h3 {
-                font-size: 2rem;
-                color: white;
-                margin: 0;
-                padding: 10px 0;
-            }
+              .logo_sncf2 {
+                  position: absolute;     
+                  left: 10px; 
+                  bottom: 10px; 
+                  width: 380px;
+                  height: auto;
+              }
+    
   
-          
-            .logo_sncf2 {
-                position: absolute;     
-                left: 10px; 
-                bottom: 10px; 
-                width: 380px;
-                height: auto;
+              .footer-link {
+                color: #e6e6e6; 
+                text-decoration: none; 
             }
-  
-
-            .footer-link {
-              color: #e6e6e6; 
-              text-decoration: none; 
-          }
-          
-          .footer-link:hover {
-              text-decoration: none;
-              color: #82BE00;
-          }
-      
-/* Responsivité */
-@media (max-width: 768px) {
-  .nav ul li {
-      display: block;
-      margin: 10px 0;
-  }
-
-  .header .titre_principal {
-      font-size: 1.5em;
-  }
-
-  .footer h3 {
-      font-size: 0.9em;
-  }
-
-  .table th, .table td {
-      padding: 8px 10px;
-  }
-
-  .btn-action {
-      font-size: 0.8em;
-      padding: 4px 8px;
-  } }
+            
+            .footer-link:hover {
+                text-decoration: underline; 
+            }
+        
+    

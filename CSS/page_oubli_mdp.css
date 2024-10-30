@@ -53,37 +53,6 @@
         width: 450px;
       }
 
-     /* Menu de navigation */
-     .nav {
-      list-style-type: none;
-      padding: 1%;
-      margin-top: 200px;
-    }
-    
-    .nav li {
-      display: inline;
-      margin: 0 50px;
-    }
-    
-    .nav a {
-      text-decoration: none;
-      color: #e6e6e6;
-      font-weight: bold;
-      font-size: 2rem;
-      font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    }
-     
-    .nav a:hover {
-      color: #82BE00;
-      text-decoration: none; }
-      
-      .titre_principal {
-        margin: 0;
-        font-size: 24px;
-        white-space: nowrap; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
       .Bienvenue {
         margin-top: 0;
         padding-top: 0;
@@ -95,10 +64,9 @@
         display: flex;
         justify-content: center;
         font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+        margin-left: 400px;
         margin-bottom: 500px;
-        padding-top: 100px;
       }
-
 
       /* FORMULAIRE */
       form {
@@ -106,7 +74,8 @@
         background-color: #ffffff;
         padding: 60px;
         border-radius: 15px;
-        width: 2000px;
+        max-width: 800px;
+        width: 100%;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
@@ -131,7 +100,7 @@
         margin-bottom: 25px;
         outline: none;
         font-size: 1.6rem;
-        width: 600px;
+        width: 100%;
         box-sizing: border-box;
       }
 
@@ -144,7 +113,8 @@
         background-color: #82be00;
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.3s ease;
-        width: 70%;
+        width: 100%;
+        max-width: 400px;
         margin-top: 30px;
       }
 
@@ -154,11 +124,10 @@
       }
 
       .info-text {
-        font-size: 2rem;
+        font-size: 1.8rem;
         color: #00205b;
         text-align: center;
         margin-bottom: 30px;
-        font-weight: bold;
       }
 
       /* FOOTER */
@@ -198,67 +167,3 @@
       .footer-link:hover {
         text-decoration: underline;
       }
-
-      /* MEDIA QUERIES pour la réactivité */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-  }
-
-  .header h1 {
-    font-size: 8vw; /* Agrandit le titre sur petit écran */
-  }
-
-  .nav {
-    flex-direction: column;
-    gap: 20px; /* Espace vertical entre les liens */
-  }
-
-  form {
-    padding: 20px;
-    max-width: 100%;
-  }
-
-  form .inputs input {
-    width: 100%; /* S'ajuste à l'écran plus petit */
-    font-size: 1.4rem;
-  }
-
-  form button {
-    width: 100%;
-  }
-
-  .footer h3 {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 10vw; /* Plus grand titre sur petits écrans */
-  }
-
-  .nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  form {
-    max-width: 100%;
-    padding: 15px;
-  }
-
-  form .inputs input {
-    font-size: 1.2rem;
-  }
-
-  form button {
-    font-size: 1.6rem;
-  }
-
-  .footer h3 {
-    font-size: 1rem;
-  }
-}

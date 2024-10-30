@@ -11,6 +11,7 @@ body{
     display: flex;
     justify-content: center;
     color:#00205b;
+  font-size: 30px;
     padding:  1px 800px;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
     text-align: center;
@@ -41,20 +42,11 @@ body{
       
       .header h1 {  
         margin: 0; 
-        font-size: 4rem; 
+        font-size: 5em; 
        text-align: center;
        color: #e6e6e6;
       }
-      .titre_principal {
-        font-size: 3rem; 
-        color: #82be00;
-        text-align: center; 
-        margin-top: 20px; 
-        letter-spacing: 2px; 
-        font-family: 'Arial', sans-serif; 
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
-    }
-    
+  
 
      .logo_sncf{
       height: 470px;
@@ -64,27 +56,27 @@ body{
 
  .Bienvenue {
   margin-top: 0;
+  padding-top: 0;
   text-align: center; 
 
 }
  .titre2{
-  font-size: 4rem;
+  font-size: 5rem;
   display: flex;
   justify-content: center;
   font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
   margin-left: 400px;
-  margin-top: 4%;
  }
 
 form {
+  max-width: 1100px;
   width: 100%;
-  max-width: 40%;
-  padding: 50px;
+  margin: 20px auto 0; /* Ajuste la marge pour le déplacer vers le haut */
+  padding: 180px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  margin-left: 2000px;
-  padding-top: 2%;
+  margin-left: 2300px;
 }
 
   .name-field {
@@ -295,129 +287,11 @@ input[type="checkbox"]:checked + label::before {
           }
           
           .footer-link:hover {
-              text-decoration: none;
-              color: #82BE00; 
+              text-decoration: underline; 
           }
       
 
-    /* MEDIA QUERIES */
-
-/* Petits appareils (mobiles) */
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-  }
-
-  .header h1 {
-    font-size: 7vw;
-  }
-
-  .logo_sncf {
-    max-width: 50%;
-    height: auto;
-  }
-
-  .titre2 {
-    font-size: 6vw;
-    margin-left: 0;
-  }
-
-  form {
-    width: 90%;
-    padding: 20px;
-  }
-
-  form h4 {
-    font-size: 2.5rem;
-  }
-
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"] {
-    font-size: 1.2rem;
-  }
-
-  form input[type="submit"] {
-    font-size: 1.8rem;
-  }
-
-  .footer h3 {
-    font-size: 1.2rem;
-  }
-
-  .logo_sncf2 {
-    width: 100px;
-  }
-}
-
-/* Tablettes (tablets) */
-@media (min-width: 600px) and (max-width: 1024px) {
-  .header h1 {
-    font-size: 6vw;
-  }
-
-  .titre2 {
-    font-size: 5vw;
-    margin-left: 0;
-  }
-
-  form {
-    width: 80%;
-    padding: 30px;
-  }
-
-  form h4 {
-    font-size: 3.5rem;
-  }
-
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"] {
-    font-size: 1.8rem;
-  }
-
-  form input[type="submit"] {
-    font-size: 2.2rem;
-  }
-
-  .footer h3 {
-    font-size: 1.5rem;
-  }
-}
-
-/* Grands écrans (ordinateurs de bureau) */
-@media (min-width: 1024px) {
-  .header h1 {
-    font-size: 4vw;
-  }
-
-  .titre2 {
-    font-size: 3vw;
-  }
-
-  form {
-    width: 60%;
-    padding: 40px;
-  }
-
-  form h4 {
-    font-size: 3rem;
-  }
-
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"] {
-    font-size: 2rem;
-  }
-
-  form input[type="submit"] {
-    font-size: 2.5rem;
-  }
-
-  .footer h3 {
-    font-size: 2rem;
-  }
-}
+    
        
         
    

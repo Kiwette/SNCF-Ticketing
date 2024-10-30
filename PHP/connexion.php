@@ -4,7 +4,7 @@ $error = ""; // Initialiser la variable d'erreur
 
 // Vérification de la soumission du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'connexion.php'; // Connexion à la base de données
+    include 'databse.php'; // Connexion à la base de données
 
     // Récupération des données du formulaire
     $email = $_POST['email'];
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['mot_de_passe'])) {
             // Connexion réussie
             $_SESSION['user_id'] = $user['id'];
-            header("Location: get_ticket.php");
+            header("Location: page_tickets.php");
             exit();
         } else {
             $error = "Mot de passe incorrect.";

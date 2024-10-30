@@ -84,21 +84,17 @@ body {
         }
 
         .nav a:hover {
-          color: #82BE00;
-          text-decoration: none; }
-          
-          .nav a:hover {
-            color: #82BE00;
-            text-decoration: none; }
-            
-            .titre_principal {
-              margin-left: 1000px;
-              font-size: 24px;
-              white-space: nowrap; 
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-            
+          background-color: #82BE00; 
+          color: #00205b; 
+          transform: translateY(-3px); 
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+      }
+
+
+        .titre_principal {
+          margin: 0;
+          font-size: 24px;
+      }
 /*Bandeau Accueil*/
 
 .Bienvenue .titre2 {
