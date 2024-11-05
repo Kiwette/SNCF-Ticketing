@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 
 
-const sequelize = new Sequelize('sncf_ticketing', 'root', '', {
+const sequelize = new Sequelize('sncf-ticketing', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
 });

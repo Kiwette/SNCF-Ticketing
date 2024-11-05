@@ -1,9 +1,9 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "nom_de_ta_base_de_donnees";
-    private $username = "ton_nom_d_utilisateur";
-    private $password = "ton_mot_de_passe";
+    private $db_name = "SNCF_TICKETING";
+    private $username = "root";
+    private $password = "0000";
     public $conn;
 
     public function getConnection() {

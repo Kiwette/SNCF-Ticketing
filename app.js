@@ -2,6 +2,8 @@
 const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 const bodyParser = require('body-parser');
+const path = require('path'); // Pour gérer les chemins de fichiers
+require('dotenv').config(); // Pour charger les variables d'environnement
 
 // Création de l'application Express
 const app = express();
@@ -9,6 +11,9 @@ const port = 3001;
 
 // Middleware pour analyser les requêtes JSON
 app.use(bodyParser.json());
+
+// Middleware pour servir les fichiers statiques (HTML, CSS, JS, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuration de la base de données
 const sequelize = new Sequelize('sncf_ticketing', 'root', '', {
@@ -68,78 +73,56 @@ sequelize.sync().then(() => {
     console.error('Erreur lors de la synchronisation de la base de données :', error);
 });
 
-// Routes pour les utilisateurs
+// Importation des routes
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
-// Route GET pour récupérer tous les utilisateurs
-app.get('/users', async (req, res) => {
-    try {
-        const users = await User.findAll();
-        res.json(users);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+// Utilisation des routes API
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+
+// Routes pour les pages HTML
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route POST pour créer un nouvel utilisateur
-app.post('/users', async (req, res) => {
-    try {
-        const newUser = await User.create(req.body);
-        res.status(201).json({ message: 'Utilisateur créé', user: newUser });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
+app.get('/cgu', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cgu.html'));
 });
 
-// Route GET pour récupérer un utilisateur par ID
-app.get('/users/:id', async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ message: 'Utilisateur non trouvé' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+app.get('/connexion', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'connexion.html'));
 });
 
-// Route PUT pour modifier un utilisateur
-app.put('/users/:id', async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (user) {
-            await user.update(req.body);
-            res.json({ message: 'Utilisateur mis à jour', user });
-        } else {
-            res.status(404).json({ message: 'Utilisateur non trouvé' });
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
+app.get('/gestion_utilisateur', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'gestion_utilisateur.html'));
 });
 
-// Route DELETE pour supprimer un utilisateur
-app.delete('/users/:id', async (req, res) => {
-    try {
-        const user = await User.findByPk(req.params.id);
-        if (user) {
-            await user.destroy();
-            res.json({ message: 'Utilisateur supprimé', id: req.params.id });
-        } else {
-            res.status(404).json({ message: 'Utilisateur non trouvé' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+app.get('/mentions', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'mentions.html'));
 });
 
-const publicRoutes = require('./routes/publicRoutes');
+app.get('/page_accueil', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page_accueil.html'));
+});
 
-// Utilisation des routes publiques
-app.use('/api', publicRoutes);
+app.get('/page_contacts', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page_contacts.html'));
+});
+
+app.get('/page_creation_profil', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page_creation_profil.html'));
+});
+
+app.get('/page_oubli_mdp', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page_oubli_mdp.html'));
+});
+
+app.get('/page_tickets', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'page_tickets.html'));
+});
 
 // Démarrer le serveur
 app.listen(port, () => {
-    console.log(`API REST disponible sur http://localhost:${3003}`);
+    console.log(`API REST disponible sur http://localhost:${port}`);
 });

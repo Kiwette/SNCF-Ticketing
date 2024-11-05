@@ -1,20 +1,19 @@
+// routes/userRoutes.js
 const express = require('express');
-const User = require('../models/User');
-const verifyToken = require('../middleware/authMiddleware'); 
-
+const userController = require('../controllers/userController');
 const router = express.Router();
+const { verifyAdmin, verifyToken } = require('../middlewares/authMiddleware');
 
-// Route GET pour récupérer les informations de l'utilisateur connecté
-router.get('/me', verifyToken, async (req, res) => {
-    try {
-        const user = await User.findByPk(req.userId);
-        if (!user) {
-            return res.status(404).json({ message: 'Utilisateur non trouvé' });
-        }
-        res.json(user);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+// Routes réservées aux administrateurs
+router.get('/users', verifyToken, verifyAdmin, userController.getAllUsers); // Admin seulement
+router.post('/users', verifyToken, verifyAdmin, userController.createUser); // Admin seulement
+router.put('/users/:id', verifyToken, verifyAdmin, userController.updateUser); // Admin seulement
+router.delete('/users/:id', verifyToken, verifyAdmin, userController.deleteUser); // Admin seulement
 
 module.exports = router;
+
+
+
+//ROUTES POUR LES UTILISATEURS
+//verifyToken : middleware pour vérifier si l'utilisateur est authentifié (token JWT valide).
+//verifyAdmin : middleware pour vérifier si l'utilisateur a le rôle administrateur.

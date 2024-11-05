@@ -2,35 +2,31 @@
 // Inclure la configuration de la base de données
 include 'includes/database.php';
 
-// Vérifier si le formulaire est soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+// Vérifier si les champs obligatoires sont définis
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cp = $_POST['cp'];
+    $role = $_POST['role'];
+    $subject = $_POST['subject'];
+    $category = $_POST['category'];
+    $priority = $_POST['priority'];
+    $description = $_POST['description'];
 
-    $titre = mysqli_real_escape_string($conn, $_POST['subject']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
-    $utilisateur_id = (int)$_POST['user_id']; // Assurer que c'est un entier
-    $categorie = (int)$_POST['category']; // Assurer que c'est un entier
-    $priorite = (int)$_POST['priority']; // Assurer que c'est un entier
-    $cree_par = mysqli_real_escape_string($conn, $_POST['created_by']);
-    $statut = 'ouvert';
-    $commentaire_resolution = ''; 
-    $action_ticket = ''; 
+    // Validation simple (vous pouvez ajouter plus de validations)
+    if (!empty($cp) && !empty($role) && !empty($subject) && !empty($category) && !empty($priority) && !empty($description)) {
+        // Insertion dans la base de données
+        $query = "INSERT INTO tickets (cp, role, subject, category, priority, description, status, created_at)
+                  VALUES (?, ?, ?, ?, ?, ?, 'ouvert', NOW())";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, 'ssssss', $cp, $role, $subject, $category, $priority, $description);
 
-    // Préparer la requête SQL
-    $stmt = $conn->prepare("INSERT INTO table_tickets (titre_ticket, description_ticket, date_creation_ticket, utilisateur_id, categorie_id, statut_id, priorite_id, cree_par, commentaire_resolution, Action_ticket) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssiiissss", $titre, $description, $utilisateur_id, $categorie, $statut, $priorite, $cree_par, $commentaire_resolution, $action_ticket);
-
-    // Exécuter la requête
-    if ($stmt->execute()) {
-        echo "Le ticket a été créé avec succès.";
+        if (mysqli_stmt_execute($stmt)) {
+            header("Location: page_tickets.html?success=1");
+        } else {
+            echo "Erreur lors de la création du ticket.";
+        }
     } else {
-        echo "Erreur : " . $stmt->error;
+        echo "Tous les champs sont obligatoires.";
     }
-
-    // Fermer la requête
-    $stmt->close();
 }
-
-// Fermer la connexion à la base de données
-$conn->close();
+mysqli_close($conn);
 ?>
