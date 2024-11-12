@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNCF TICKETING</title>
+    <link rel="stylesheet" href="/CSS/connexion.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script>
+      // Fonction pour envoyer une requête d'inscription via AJAX
+      function signup(event) {
+        event.preventDefault();
+
+        const nom = document.getElementById('nom').value;
+        const prenom = document.getElementById('prenom').value;
+        const email = document.getElementById('email').value;
+        const mot_de_passe = document.getElementById('password').value;
+        const role_id = document.getElementById('role').value;
+        const cp = document.getElementById('cp').value;
+
+        const data = {
+          nom,
+          prenom,
+          email,
+          mot_de_passe,
+          role_id,
+          numéro_CP: cp
+        };
+
+        fetch('/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.message) {
+            alert(data.message);
+            window.location.href = "/HTML/page_accueil.html"; // Rediriger après succès
+          } else {
+            alert(data.error || 'Une erreur est survenue');
+          }
+        })
+        .catch(error => alert('Erreur de requête: ' + error));
+      }
+
+      // Fonction pour envoyer une requête de connexion via AJAX
+      function login(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const mot_de_passe = document.getElementById('password').value;
+
+        const data = {
+          email,
+          mot_de_passe
+        };
+
+        fetch('/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.token) {
+            alert(data.message);
+            localStorage.setItem('token', data.token);  
+            window.location.href = "/HTML/page_accueil.html"; 
+          } else {
+            alert(data.error || 'Une erreur est survenue');
+          }
+        })
+        .catch(error => alert('Erreur de requête: ' + error));
+      }
+    </script>
+  </head>
+
+  <body>
+    <section>
+      <header class="header">
+        <img class="logo_sncf" src="/Images/logo.news.png" alt="logo_sncf" />
+        <div class="presentation">
+          <h1 class="titre_principal">SNCF TICKETING</h1>
+        </div>
+        <nav class="nav">
+          <li><a href="/public/html/Page_accueil.html">Accueil</a></li>
+        </nav>
+      </header>
+
+      <div class="Bienvenue">
+        <h2 class="titre2">Je me connecte à mon espace :<span style="color: #82be00"> SNCF Ticketing </span></h2>
+      </div>
+
+      <form id="loginForm" onsubmit="login(event)">
+        <h1 class="form-title">Je me connecte à mon compte</h1>
+
+        <div class="inputs">
+          <label for="email">E-mail *</label>
+          <input type="email" id="email" placeholder="Mon adresse mail" required />
+
+          <label for="cp">Numéro de CP*</label>
+          <input type="text" id="cp" placeholder="Numéro de CP" maxlength="8" required />
+
+          <div class="inputs">
+            <label for="password">Mot de passe *</label>
+            <input type="password" id="password" placeholder="Mot de passe" required />
+            <span id="togglePassword" class="fa fa-eye"></span> 
+          </div>        
+        </div>
+
+        <a href="/HTML/page_oubli_mdp.html" class="forgot-password">J'ai oublié mon mot de passe</a>
+        <button type="submit" class="submit-btn">Continuer</button>
+        <p class="create-account">
+          Je n'ai pas de compte. <a href="/HTML/page_creation_profil.html">Créer un compte</a>.
+        </p>
+      </form>
+    </section>
+  </body>
+</html>
