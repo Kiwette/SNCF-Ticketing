@@ -1,24 +1,24 @@
 <?php
-// Connexion à la base de données
-include 'includes/database.php';
+require 'db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cp = $_POST['cp'];
-    $role = $_POST['role'];
-    $subject = $_POST['subject'];
-    $category = $_POST['category'];
-    $priority = $_POST['priority'];
-    $description = $_POST['description'];
+$titre = $_POST['titre'];
+$description = $_POST['description'];
+$cree_par = $_POST['cree_par'];
+$date_crea = date('Y-m-d H:i:s');
+$statut = $_POST['statut'];
+$priorite = $_POST['priorite'];
+$categorie = $_POST['categorie'];
 
-    $query = "INSERT INTO tickets (cp, role, subject, category, priority, description, status, created_by)
-              VALUES ('$cp', '$role', '$subject', '$category', '$priority', '$description', 'En attente', 'admin')";
-    
-    if (mysqli_query($conn, $query)) {
-        echo json_encode(["success" => true, "message" => "Ticket créé avec succès."]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Erreur lors de la création du ticket."]);
-    }
-}
+$sql = "INSERT INTO table_ticket (titre, description, crée_par, date_crea, statut, priorité, categorie) 
+        VALUES (:titre, :description, :cree_par, :date_crea, :statut, :priorite, :categorie)";
 
-mysqli_close($conn);
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':titre', $titre);
+$stmt->bindParam(':description', $description);
+$stmt->bindParam(':cree_par', $cree_par, PDO::PARAM_INT);
+$stmt->bindParam(':date_crea', $date_crea);
+$stmt->bindParam(':statut', $statut);
+$stmt->bindParam(':priorite', $priorite);
+$stmt->bindParam(':categorie', $categorie);
+$stmt->execute();
 ?>

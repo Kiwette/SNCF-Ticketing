@@ -1,31 +1,36 @@
 <?php
 
-// Inclure les contrôleurs nécessaires
-require_once '../controllers/authController.php';
+// Ajouter des routes d'authentification
+$app->post('/login', function ($request, $response, $args) {
+    // Récupérer les données du formulaire
+    $data = $request->getParsedBody();
+    $email = $data['email'] ?? '';
+    $password = $data['password'] ?? '';
 
-// Définir l'en-tête Content-Type pour les réponses JSON
-header('Content-Type: application/json');
+    // Logique de vérification (remplacer par la logique réelle)
+    if ($email === 'user@example.com' && $password === 'password123') {
+        $response->getBody()->write(json_encode(['message' => 'Connexion réussie']));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+    } else {
+        $response->getBody()->write(json_encode(['message' => 'Identifiants invalides']));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(401);
+    }
+});
 
-// Gérer les routes
-$requestMethod = $_SERVER['REQUEST_METHOD'];
-$requestUri = $_SERVER['REQUEST_URI'];
+$app->post('/register', function ($request, $response, $args) {
+    // Récupérer les données du formulaire d'enregistrement
+    $data = $request->getParsedBody();
+    $email = $data['email'] ?? '';
+    $password = $data['password'] ?? '';
+    $role = $data['role'] ?? 'user'; // Par défaut, rôle utilisateur
 
-// Route pour l'inscription
-if ($requestUri == '/api/auth/signup' && $requestMethod == 'POST') {
-    signup(); // Appeler la fonction signup() du contrôleur authController.php
-}
-// Route pour la connexion
-elseif ($requestUri == '/api/auth/login' && $requestMethod == 'POST') {
-    login(); // Appeler la fonction login() du contrôleur authController.php
-}
-// Route pour la déconnexion (si nécessaire)
-elseif ($requestUri == '/api/auth/logout' && $requestMethod == 'POST') {
-    logout(); // Appeler la fonction logout() du contrôleur authController.php
-}
-// Si la route n'est pas définie, on renvoie une erreur 404
-else {
-    header("HTTP/1.1 404 Not Found");
-    echo json_encode(["message" => "Route non trouvée"]);
-}
-
-?>
+    // Logique d'enregistrement de l'utilisateur (à remplacer par une vraie logique d'enregistrement)
+    $response->getBody()->write(json_encode([
+        'message' => 'Utilisateur enregistré avec succès',
+        'user' => [
+            'email' => $email,
+            'role' => $role
+        ]
+    ]));
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});

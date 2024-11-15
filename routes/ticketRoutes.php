@@ -1,29 +1,14 @@
 <?php
+use App\Controllers\TicketController;
 
-// Inclure les contrôleurs nécessaires
-require_once '../controllers/ticketController.php';
+// Créer un nouveau ticket (nécessite une authentification)
+$app->post('/tickets/create', [TicketController::class, 'create'])->middleware('auth');
 
-// Gérer les routes
-$requestMethod = $_SERVER['REQUEST_METHOD'];
-$requestUri = $_SERVER['REQUEST_URI'];
+// Voir les détails d'un ticket (accessible par tous les utilisateurs authentifiés)
+$app->get('/tickets/{id}', [TicketController::class, 'view'])->middleware('auth');
 
-// Route pour récupérer tous les tickets
-if ($requestUri == '/api/tickets' && $requestMethod == 'GET') {
-    getTickets(); // Appeler la fonction pour récupérer tous les tickets
-}
-// Route pour créer un ticket
-elseif ($requestUri == '/api/tickets' && $requestMethod == 'POST') {
-    createTicket(); // Appeler la fonction pour créer un ticket
-}
-// Route pour récupérer un ticket par ID
-elseif (preg_match('/\/api\/tickets\/(\d+)/', $requestUri, $matches) && $requestMethod == 'GET') {
-    $ticketId = $matches[1]; // Capturer l'ID du ticket à partir de l'URL
-    getTicketById($ticketId); // Appeler la fonction pour récupérer un ticket spécifique par ID
-}
-// Si la route n'est pas définie, renvoyer une erreur 404
-else {
-    header("HTTP/1.1 404 Not Found");
-    echo json_encode(["message" => "Route non trouvée"]);
-}
+// Liste des tickets de l'utilisateur
+$app->get('/tickets/my', [TicketController::class, 'listUserTickets'])->middleware('auth');
 
-?>
+// Gestion des tickets (nécessite le rôle administrateur)
+$app->get('/admin/tickets', [TicketController::class, 'listAllTickets'])->middleware('auth', 'admin');

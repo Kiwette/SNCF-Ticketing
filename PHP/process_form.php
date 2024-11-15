@@ -1,5 +1,12 @@
 <?php
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Vérification du jeton CSRF
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("Erreur de sécurité : jeton CSRF invalide.");
+    }
+
     // Sécurisation des données du formulaire
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
@@ -11,6 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($nom) || empty($prenom) || empty($cp) || empty($email) || empty($message)) {
         echo "Tous les champs doivent être remplis.";
     } else {
+        // Validation de l'email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "L'email fourni est invalide.";
+        }
+
+        // Validation du code postal
+        if (!preg_match('/^[0-9]{5}$/', $cp)) {
+            echo "Le code postal doit comporter 5 chiffres.";
+        }
+
         // Envoi d'email (à personnaliser selon votre serveur de messagerie)
         $to = "contact@sncf.com";
         $subject = "Demande de contact - SNCF Ticketing";
@@ -20,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mail($to, $subject, $body, $headers)) {
             echo "Votre demande a été envoyée avec succès, nous vous répondrons dans les plus brefs délais !";
         } else {
+            error_log("Erreur lors de l'envoi de l'email.");
             echo "Une erreur est survenue, veuillez réessayer plus tard.";
         }
     }

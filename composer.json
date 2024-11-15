@@ -1,5 +1,11 @@
 {
+    "name": "votre-utilisateur/sncf-ticketing", 
+    "description": "Application pour la gestion de billets SNCF", 
+    "type": "project", 
+    "license": "proprietary", 
+
     "require": {
-        "firebase/php-jwt": "^6.10"
+        "firebase/php-jwt": "^6.10",
+        "slim/slim": "^4.14"
     }
 }

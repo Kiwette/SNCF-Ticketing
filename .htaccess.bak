@@ -1,15 +1,15 @@
-AllowOverride All
-# Permet d'utiliser les fichiers .htm et .html
+# Permet d'utiliser les fichiers .htm et .html comme PHP
 Options +MultiViews
 AddType application/x-httpd-php .html .htm
 
 # Redirige les requêtes vers un fichier index.php
 DirectoryIndex index.php
 
-# Active l'URL rewriting (si nécessaire)
+# Active l'URL rewriting
 RewriteEngine On
-# Si le projet est dans la racine du serveur, retirez RewriteBase /
-# RewriteBase /
 
-# Cela redirige toutes les requêtes vers index.php si nécessaire
+
+RewriteBase 
+
+# Cela redirige toutes les requêtes vers index.php
 RewriteRule ^(.*)$ index.php [QSA,L]

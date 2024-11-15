@@ -1,7 +1,8 @@
 <?php
 
 // Connexion à la base de données
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/db_connect.php';
+
 
 // Fonction pour récupérer tous les tickets
 function getTickets() {

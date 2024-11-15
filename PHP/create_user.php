@@ -1,34 +1,25 @@
 <?php
-// Connexion à la base de données
-$dsn = 'mysql:host=localhost;dbname=sncf_ticketing;charset=utf8';
-$username = 'root';
-$password = '';
+require_once 'config/db_connect.php'; // Assurez-vous que le chemin est correct
 
-try {
-    $pdo = new PDO($dsn, $username, $password);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom'];
+$numero_cp = $_POST['numero_cp'];
+$mail = $_POST['mail'];
+$mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+$date_crea_comte = date('Y-m-d H:i:s');
+$role = $_POST['role'];
+$statut_compte = 'Actif';
 
-// Vérification de la soumission du formulaire
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des données du formulaire
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $email = $_POST['email'];
-    $role = $_POST['role'];
-    $cp = $_POST['cp'];
-
-    // Valider les données (exemple simple de validation)
-    if (empty($nom) || empty($prenom) || empty($email) || empty($cp) || empty($role)) {
-        die("Tous les champs doivent être remplis.");
-    }
-
-    // Insérer l'utilisateur dans la base de données
-    $sql = "INSERT INTO utilisateurs (nom, prenom, email, role, cp) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$nom, $prenom, $email, $role, $cp]);
-
-    echo "Utilisateur créé avec succès ! <a href='/HTML/gestion_utilisateurs.html'>Retourner à la gestion des utilisateurs</a>";
-}
+$sql = "INSERT INTO table_utilisateur (nom, prénom, numero_cp, mail, mot_de_passe, date_crea_comte, role, statut_compte) 
+        VALUES (:nom, :prenom, :numero_cp, :mail, :mot_de_passe, :date_crea_comte, :role, :statut_compte)";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':nom', $nom);
+$stmt->bindParam(':prenom', $prenom);
+$stmt->bindParam(':numero_cp', $numero_cp);
+$stmt->bindParam(':mail', $mail);
+$stmt->bindParam(':mot_de_passe', $mot_de_passe);
+$stmt->bindParam(':date_crea_comte', $date_crea_comte);
+$stmt->bindParam(':role', $role);
+$stmt->bindParam(':statut_compte', $statut_compte);
+$stmt->execute();
 ?>
