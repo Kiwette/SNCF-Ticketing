@@ -17,37 +17,27 @@ body{
   text-align: center;
 }
 
-h3{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 2rem;
-}
 
-/*HEADER*/
-.header{
-  display : flex;
+/* HEADER */
+.header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   height: 280px;
   width: 100%;
-  border: solid;
   background-color: #00205b;
-  border-color: #00205b;  
   padding: 20px;
 }
 
-.header h1 {  
-  margin: 0; 
-  font-size: 5em; 
-  text-align: center;
+.header h1 {
+  margin: 0;
+  font-size: 5em;
   color: #e6e6e6;
+ justify-content: center ;
+ margin-left: 400px;
 }
 
-.logo_sncf{
+.logo_sncf {
   height: 470px;
   width: 450px;
 }
@@ -57,7 +47,6 @@ h3{
   list-style-type: none;
   padding: 1%;
   margin-top: 200px;
-  margin-right: 80px;
 }
 
 .nav li {
@@ -75,15 +64,25 @@ h3{
 
 .nav a:hover {
   color: #82BE00;
-  text-decoration: none;
-}
+  text-decoration: none; }
+  
 
 /*PREMIER BLOC*/
-.Bienvenue {
-  margin-top: 0;
-  padding-top: 0;
-  text-align: center;
+
+.titre_principal {
+  margin: 0;
+  font-size: 24px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+/* Bandeau Accueil */
+.Bienvenue {
+  text-align: center;
+  margin-top: 80px;
+}
+
 
 .titre2{
   font-size: 6rem;
@@ -167,10 +166,10 @@ form {
 
 #togglePassword {
   position: absolute;
-  right: 10px; /* Positionne l'icône à droite du champ */
-  top: 50%; /* Centrer verticalement l'icône */
-  transform: translateY(-50%); /* Ajuste verticalement l'icône pour l'aligner au centre du champ */
-  cursor: pointer; /* Pour indiquer que c'est cliquable */
+  right: 10px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  cursor: pointer; 
 }
 
 form label {
@@ -252,6 +251,9 @@ input, button {
 
 /* FOOTER */
 .footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   height: 280px;
   background-color: #00205b;
   color: white;
@@ -259,10 +261,9 @@ input, button {
   position: fixed;
   width: 100%;
   bottom: 0;
-  margin: 0; 
-  padding: 0; 
-  margin-top: 20px; 
-}     
+  margin: 0;
+  padding: 0;
+}
 
 .footer h3 {
   font-size: 2rem;
@@ -272,18 +273,18 @@ input, button {
 }
 
 .logo_sncf2 {
-  position: absolute;     
-  left: 10px; 
-  bottom: 10px; 
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
   width: 380px;
   height: auto;
 }
 
 .footer-link {
-  color: #e6e6e6; 
-  text-decoration: none; 
+  color: #e6e6e6;
+  text-decoration: none;
 }
-
 .footer-link:hover {
-  text-decoration: underline; 
-}
+  color: #82BE00;
+  text-decoration: none }
+

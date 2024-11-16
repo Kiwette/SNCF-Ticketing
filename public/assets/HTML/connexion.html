@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SNCF TICKETING</title>
-    <link rel="stylesheet" href="/CSS/connexion.css" />
+    <link rel="stylesheet" href="/public/assets/HTML/CSS/connexion.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -44,7 +44,7 @@
         .then(data => {
           if (data.message) {
             alert(data.message);
-            window.location.href = "/HTML/page_accueil.html"; // Rediriger après succès
+            window.location.href = "/public/assets/HTML/Page_accueil.html"; // Rediriger après succès
           } else {
             alert(data.error || 'Une erreur est survenue');
           }
@@ -76,7 +76,7 @@
           if (data.token) {
             alert(data.message);
             localStorage.setItem('token', data.token);  
-            window.location.href = "/HTML/page_accueil.html"; 
+            window.location.href = "/public/assets/HTML/Page_accueil.html"; 
           } else {
             alert(data.error || 'Une erreur est survenue');
           }
@@ -94,7 +94,7 @@
           <h1 class="titre_principal">SNCF TICKETING</h1>
         </div>
         <nav class="nav">
-          <li><a href="/public/html/Page_accueil.html">Accueil</a></li>
+          <li><a href="/public/assets/HTML/Page_accueil.html">Accueil</a></li>
         </nav>
       </header>
 
@@ -119,12 +119,25 @@
           </div>        
         </div>
 
-        <a href="/HTML/page_oubli_mdp.html" class="forgot-password">J'ai oublié mon mot de passe</a>
+        <a href="/public/assets/HTML/page_oubli_mdp.html" class="forgot-password">J'ai oublié mon mot de passe</a>
         <button type="submit" class="submit-btn">Continuer</button>
         <p class="create-account">
-          Je n'ai pas de compte. <a href="/HTML/page_creation_profil.html">Créer un compte</a>.
+          Je n'ai pas de compte. <a href="/public/assets/HTML/page_creation_profil.html">Créer un compte</a>.
         </p>
       </form>
-    </section>
-  </body>
+       <!-- FOOTER -->
+       <footer class="footer">
+        <img class="logo_sncf2" src="/Images/logo-removebg-preview.png" alt="logo SNCF"/>
+        <div class="contenu_footer">
+            <h3>SNCF Ticketing |
+                <a href="/version.html" class="footer-link">Version 1.1</a> |
+                <a href="/public/assets/HTML/cgu.html" class="footer-link">CGU</a> |
+                <a href="/mentions-legales.html" class="footer-link">Mentions légales</a> |
+                <a href="/public/assets/HTML/page_contacts.html" class="footer-link">Contactez-nous</a> |
+                e-SNCF ©2024
+            </h3>
+        </div>
+    </footer>
+  </section>            
+</body>
 </html>

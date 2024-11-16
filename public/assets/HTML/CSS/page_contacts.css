@@ -83,12 +83,11 @@ body {
           transition: all 0.3s ease-in-out; 
         }
 
-        .nav a:hover {
-          background-color: #82BE00; 
-          color: #00205b; 
-          transform: translateY(-3px); 
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-      }
+    
+.nav a:hover {
+  color: #82BE00;
+  text-decoration: none; }
+  
 
 
         .titre_principal {
@@ -173,12 +172,24 @@ label {
   font-weight: bold;
 }
 
+/* Agrandir l'encadré de l'input email */
+#email {
+  width: 100%;
+  padding: 20px;
+  font-size: 2rem;
+  height: 50px;  /* Spécifier la hauteur plus grande */
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Style global pour les autres champs */
 input[type="text"], textarea {
   width: 100%;
   padding: 15px;
   border: 1px solid #cccccc;
   border-radius: 10px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   font-size: 2rem;
 }
 
@@ -259,48 +270,46 @@ transform: scale(1.05);
 }
  
   
-
-
-
 /* FOOTER */
 .footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   height: 280px;
   background-color: #00205b;
   color: white;
   text-align: center;
   position: fixed;
-  left: 0;
-  bottom: 0; 
   width: 100%;
+  bottom: 0;
   margin: 0;
   padding: 0;
 }
-            
-            .footer h3 {
-                font-size: 2rem;
-                color: white;
-                margin: 0;
-                padding: 10px 0;
-            }
-  
-          
-            .logo_sncf2 {
-                position: absolute;     
-                left: 10px; 
-                bottom: 10px; 
-                width: 380px;
-                height: auto;
-            }
-  
 
-            .footer-link {
-              color: #e6e6e6; 
-              text-decoration: none; 
-          }
-          
-          .footer-link:hover {
-              text-decoration: underline; 
-          }
+.footer h3 {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.logo_sncf2 {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 380px;
+  height: auto;
+}
+
+.footer-link {
+  color: #e6e6e6;
+  text-decoration: none;
+}
+.footer-link:hover {
+  color: #82BE00;
+  text-decoration: none }
+
+  
       
           .contenu_footer h3 {
             font-size: 2rem;

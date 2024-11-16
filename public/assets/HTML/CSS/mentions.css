@@ -71,6 +71,11 @@ body{
             font-size: 2rem;
             font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
           }
+          
+          .nav a:hover {
+            color: #82BE00;
+            text-decoration: none;
+          }
   
           .titre_principal {
             margin: 0;
@@ -122,15 +127,18 @@ body{
   }
   
   .Decription {     
-      max-width: 60%;
-      margin-left: 100px;
+      max-width: 80%;
+      margin-left: 700px;
     border: 2px solid #00205b; 
     border-radius: 10px;
     margin-top: 350px;
     color: #00205b;
-    padding: 30px;
+    padding: 60px;
+    background-color: #ffffff; 
 }
   
+
+
   .Premier_Texte {
     font-size: 3rem; 
     line-height: 1.5; 
@@ -157,50 +165,45 @@ body{
     color: #00205b;    
 }
 
+/* FOOTER */
+.footer {
+  height: 280px;
+  background-color: #00205b;
+  color: white;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  margin: 0; 
+  padding: 0; 
+  margin-top: 20px; 
+}     
 
-  /* FOOTER */
-  .footer {
-    height: 280px;
-    background-color: #00205b;
-    color: white;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    margin: 0; 
-    padding: 0; 
-    margin-top: 20px; 
-  }     
-              
-              .footer h3 {
-                  font-size: 2rem;
-                  color: white;
-                  margin: 0;
-                  padding: 10px 0;
-              }
-    
-            
-              .logo_sncf2 {
-                  position: absolute;     
-                  left: 10px; 
-                  bottom: 10px; 
-                  width: 380px;
-                  height: auto;
-              }
-    
-  
-              .footer-link {
-                color: #e6e6e6; 
-                text-decoration: none; 
-            }
-            
-            .footer-link:hover {
-                text-decoration: underline; 
-            }
-        
-  
-        
-  
+.footer h3 {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.logo_sncf2 {
+  position: absolute;     
+  left: 10px; 
+  bottom: 10px; 
+  width: 380px;
+  height: auto;
+}
+
+.footer-link {
+  color: #e6e6e6; 
+  text-decoration: none; 
+}
+
+.footer-link:hover {
+  color: #6fae00;
+}
+
+        /*MEDIA QUERIES*/
      
             @media screen and (max-width: 768px) {
                 .ImageText {

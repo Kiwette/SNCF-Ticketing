@@ -1,9 +1,17 @@
 <?php
 // Connexion à la base de données
-include 'includes/database.php';
+require_once 'config/db_connect.php'; // Assurez-vous que le chemin est correct
 
+session_start();
+
+// Vérification du rôle de l'utilisateur (administrateur)
+if ($_SESSION['role'] !== 'Administrateur') {
+    echo json_encode(["success" => false, "message" => "Accès refusé."]);
+    exit;
+}
+
+// Vérification et validation des données
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Vérification et validation des données
     if (isset($_POST['ticket_id'], $_POST['status'], $_POST['resolution_comment'])) {
         $ticket_id = $_POST['ticket_id'];
         $status = $_POST['status'];
@@ -20,24 +28,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resolution_comment = htmlspecialchars($resolution_comment);
 
         // Utilisation de requêtes préparées pour éviter les injections SQL
-        $sql = "UPDATE tickets SET status = :status, resolution_comment = :resolution_comment WHERE id = :ticket_id";
-        $stmt = $pdo->prepare($sql);
-        
+        $sql = "UPDATE tickets SET status = ?, resolution_comment = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+
+        // Vérifier si la préparation de la requête a réussi
+        if ($stmt === false) {
+            echo json_encode(["success" => false, "message" => "Erreur de préparation de la requête."]);
+            exit;
+        }
+
         // Lier les paramètres et exécuter la requête
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':resolution_comment', $resolution_comment);
-        $stmt->bindParam(':ticket_id', $ticket_id, PDO::PARAM_INT);
+        mysqli_stmt_bind_param($stmt, 'ssi', $status, $resolution_comment, $ticket_id);
 
         // Exécuter la requête et vérifier si elle a réussi
-        if ($stmt->execute()) {
+        if (mysqli_stmt_execute($stmt)) {
             echo json_encode(["success" => true, "message" => "Ticket mis à jour avec succès."]);
         } else {
             echo json_encode(["success" => false, "message" => "Erreur lors de la mise à jour du ticket."]);
         }
+
+        // Fermer la requête préparée
+        mysqli_stmt_close($stmt);
     } else {
         echo json_encode(["success" => false, "message" => "Données manquantes dans la requête."]);
     }
 }
 
-mysqli_close($conn);  // Fermer la connexion à la base de données
+// Fermer la connexion à la base de données
+mysqli_close($conn);
 ?>

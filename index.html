@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des utilisateurs</title>
+</head>
+<body>
+    <h1>Liste des utilisateurs</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Rôle</th>
+            </tr>
+        </thead>
+        <tbody id="utilisateur-table">
+            <!-- Les données seront insérées ici par JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // Appel API pour récupérer les utilisateurs
+        fetch('http://localhost:3001/api/donnees')
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('utilisateur-table');
+                data.forEach(utilisateur => {
+                    const row = `<tr>
+                        <td>${utilisateur.id}</td>
+                        <td>${utilisateur.nom}</td>
+                        <td>${utilisateur.prenom}</td>
+                        <td>${utilisateur.email}</td>
+                        <td>${utilisateur.role}</td>
+                    </tr>`;
+                    table.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
+    </script>
+</body>
+</html>

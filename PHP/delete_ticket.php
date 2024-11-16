@@ -2,6 +2,13 @@
 // Connexion à la base de données
 require_once 'config/db_connect.php'; // Assurez-vous que le chemin est correct
 
+session_start();
+
+// Vérification du rôle de l'utilisateur (administrateur)
+if ($_SESSION['role'] !== 'Administrateur') {
+    echo json_encode(["success" => false, "message" => "Accès refusé."]);
+    exit;
+}
 
 // Vérifier si la requête est de type POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -8,8 +8,8 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between;  
+    align-items: center; 
     height: 280px;
     width: 100%;
     border: solid;
@@ -17,7 +17,6 @@ header {
     border-color: #00205b;
     padding: 20px;
 }
-
 header h1 {
     margin: 0;
     font-size: 8em;
@@ -25,32 +24,43 @@ header h1 {
     color: #e6e6e6;
 }
 
+header .presentation {
+    flex: 1;
+    text-align: center;
+}
+
+
 .logo_sncf {
     height: 470px;
     width: 450px;
 }
 
 /* Menu de navigation */
-nav {
+.nav {
     list-style-type: none;
     padding: 1%;
     margin-top: 200px;
-    display: flex;
-    justify-content: space-around;
-}
-
-nav li {
+    margin-right: 80px;
+  }
+  
+  .nav li {
     display: inline;
     margin: 0 50px;
-}
-
-nav a {
+  }
+  
+  .nav a {
     text-decoration: none;
-    color: #f1f1f1;
+    color: #e6e6e6;
     font-weight: bold;
     font-size: 2rem;
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-}
+  }
+  
+  .nav a:hover {
+    color: #82BE00;
+    text-decoration: none;
+  }
+  
 
 /* Section de bienvenue */
 .Bienvenue {
@@ -179,11 +189,8 @@ th:hover {
     background-color: #d9d9d9; /* Change la couleur de fond des en-têtes lors du survol */
 }
 
-/* Footer */
-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+/* FOOTER */
+.footer {
     height: 280px;
     background-color: #00205b;
     color: white;
@@ -193,10 +200,13 @@ footer {
     bottom: 0;
     margin: 0;
     padding: 0;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligne le contenu vers le bas */
+    padding-bottom: 10px; /* Espacement en bas */
 }
 
-footer h3 {
+.footer h3 {
     font-size: 2rem;
     color: white;
     margin: 0;
@@ -211,11 +221,18 @@ footer h3 {
     height: auto;
 }
 
+.contenu_footer {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .footer-link {
     color: #e6e6e6;
     text-decoration: none;
 }
 
 .footer-link:hover {
-    text-decoration: underline;
+    color: #6fae00;
 }

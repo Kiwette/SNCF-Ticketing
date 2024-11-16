@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Réinitialisation du mot de passe - SNCF Ticketing</title>
-    <link rel="stylesheet" href="/CSS/page_oubli_mdp.css" />
+    <link rel="stylesheet" href="/public/assets/HTML/CSS/page_oubli_mdp.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="/JS/connexion.js"></script>
   </head>
@@ -17,11 +17,14 @@
         <div class="presentation">
           <h1 class="titre_principal">SNCF TICKETING</h1>
         </div>
+        <nav class="nav">
+          <li><a href="/public/assets/HTML/Page_accueil.html">Accueil</a></li>
+        </nav>
       </header>
 
       <!-- TITRE DU FORMULAIRE -->
       <div class="Bienvenue">
-        <h2 class="titre2">Réinitialiser mon mot de passe<span style="color: #82be00"> SNCF Ticketing </span></h2>       
+        <h2 class="titre2">Réinitialiser mon mot de passe :  <span style="color: #82be00">  SNCF Ticketing </span></h2>       
       </div>
 
       <!-- FORMULAIRE -->
@@ -64,8 +67,8 @@
       document.getElementById("forgotPasswordForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Empêche l'envoi du formulaire
         alert("Un lien de réinitialisation a été envoyé à votre adresse e-mail.");
-        // Vous pouvez ici rediriger ou afficher un autre message à l'utilisateur
-        window.location.href = "/HTML/connexion.html"; // Par exemple, rediriger vers la page de connexion
+        
+        window.location.href = "/public/assets/HTML/connexion.html"; 
       });
     </script>
   </body>

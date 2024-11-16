@@ -68,6 +68,33 @@
         margin-bottom: 500px;
       }
 
+
+      /* Menu de navigation */
+.nav {
+  list-style-type: none;
+  padding: 1%;
+  margin-top: 200px;
+  margin-right: 80px;
+}
+
+.nav li {
+  display: inline;
+  margin: 0 50px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #e6e6e6;
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+.nav a:hover {
+  color: #82BE00;
+  text-decoration: none;
+}
+
       /* FORMULAIRE */
       form {
         margin: 80px auto;
@@ -131,39 +158,40 @@
       }
 
       /* FOOTER */
-      .footer {
-        height: 280px;
-        background-color: #00205b;
-        color: white;
-        text-align: center;
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-        margin: 0;
-        padding: 0;
-        margin-top: 20px;
-      }
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 280px;
+  background-color: #00205b;
+  color: white;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+}
 
-      .footer h3 {
-        font-size: 2rem;
-        color: white;
-        margin: 0;
-        padding: 10px 0;
-      }
+.footer h3 {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+}
 
-      .logo_sncf2 {
-        position: absolute;
-        left: 10px;
-        bottom: 10px;
-        width: 380px;
-        height: auto;
-      }
+.logo_sncf2 {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 380px;
+  height: auto;
+}
 
-      .footer-link {
-        color: #e6e6e6;
-        text-decoration: none;
-      }
-
-      .footer-link:hover {
-        text-decoration: underline;
-      }
+.footer-link {
+  color: #e6e6e6;
+  text-decoration: none;
+}
+.footer-link:hover {
+  color: #82BE00;
+  text-decoration: none }

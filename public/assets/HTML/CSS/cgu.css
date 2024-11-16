@@ -1,21 +1,9 @@
-
-body{
-  margin: 0 auto;
+/* Global styles */
+body {
+  margin: 0;
   background-color: #e6e6e6;
   height: 100%;
-  overflow: hidden;
-  position: relative;
   font-family: Arial, Helvetica, sans-serif;
-  }
-
-.presentation {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  color: #00205b;
-  font-size: 30px;
-  padding: 1px 800px;
-  text-align: center;
 }
 
 /* HEADER */
@@ -29,30 +17,19 @@ body{
   padding: 20px;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 5em;
-  color: #e6e6e6;
- justify-content: center ;
- margin-left: 400px;
-}
-
 .logo_sncf {
   height: 470px;
   width: 450px;
 }
 
-button.submit-btn {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button.submit-btn:hover {
-  background-color: var(--color-secondary);
+.presentation {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  color: #e6e6e6;
+  font-size: 4rem;
+  padding: 1px 800px;
+  text-align: center;
 }
 
 /* Menu de navigation */
@@ -77,15 +54,7 @@ button.submit-btn:hover {
 
 .nav a:hover {
   color: #82BE00;
-  text-decoration: none; }
-  
-  
-.titre_principal {
-  margin: 0;
-  font-size: 24px;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-decoration: none;
 }
 
 /* Bandeau Accueil */
@@ -94,63 +63,50 @@ button.submit-btn:hover {
   margin-top: 80px;
 }
 
-.titre2 {
-  font-size: 5rem; 
-  margin-bottom: 120px;
-  white-space: nowrap; 
-  margin-left: -300px;
-}
-
-
-/* GENERAL BLOCK */
-.BlocGénéral {
+.titre2{
+  font-size: 5rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #e6e6e6;
-  padding: 20px;
-  width: 100%;
-  min-height: calc(100vh - 560px);
+  justify-content: center;
+  margin-left: 400px;
+  margin-bottom: 300px;
 }
 
-/* PREMIERE PARTIE */
-.PremierBloc {
+/* CGUsection styles */
+section {
   display: flex;
   justify-content: center;
   align-items: flex-start; 
-  width: 4000px;
-  margin-top: 100px;
+  padding: 10px;
+  margin-top: 90px; 
 }
 
-.Decription {
-  display: flex; /* Affichage flex pour que les enfants soient en ligne */
-  flex-direction: column; /* Maintien d'un affichage vertical pour les titres et les paragraphes */
+.cgu-container {
+  background-color: #e7f1fa;
+  padding: 40px;
+  border: 1px solid #82BE00;
+  border-radius: 14px;
+  margin-bottom: 20px;
   width: 80%;
-  margin: 0 auto;
-  background-color: white;
-  padding: 50px;
-  border: 2px solid #00205b;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 4500px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
 }
 
-.Decription h3 {
-  font-size: 2.5em;
-  color: #00205b;
-  margin-top: 20px;
-  margin-bottom: 10px;
+
+/* Section style */
+.cgu-section {
+  margin-bottom: 25px;
 }
 
-.Premier_Texte {
-  font-size: 3rem;
-  line-height: 1.5;
+.cgu-section h3 {
+  color: #82BE00;
+  font-size: 30px;
 }
 
-p {
-  font-size: 2em;
-  margin-bottom: 10px;
-  color: #00205b;
+.cgu-container p {
+  font-size: 32px;
+  line-height: 1.6;
 }
+
 
 /* FOOTER */
 .footer {
@@ -187,29 +143,26 @@ p {
   color: #e6e6e6;
   text-decoration: none;
 }
+
 .footer-link:hover {
   color: #82BE00;
-  text-decoration: none }
+  text-decoration: none;
+}
 
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-  .ImageText {
-      flex-direction: column;
-      align-items: center;
+/* Responsive design */
+@media (max-width: 768px) {
+  section {
+    padding: 10px;
+    width: 100%;
   }
 
-  .Image2 {
-      max-width: 100%;
-      margin-right: 0;
-      margin-bottom: 20px;
+  .cgu-container {
+    width: 100%;
+    padding: 20px;
   }
 
-  .Decription {
-      max-width: 100%;
-  }
-
-  .PremierBloc {
-      flex-direction: column; /* Pour mobile, mettre en vertical */
+  .nav ul li {
+    display: block;
+    margin: 10px 0;
   }
 }

@@ -1,46 +1,48 @@
 <?php
 // Connexion à la base de données
-require_once 'config/db_connect.php'; // Assurez-vous que le chemin est correct
+$servername = "localhost"; // Remplacez par votre serveur MySQL
+$username = "root"; // Remplacez par votre nom d'utilisateur
+$password = ""; // Remplacez par votre mot de passe
+$dbname = "sncf_tickets"; // Remplacez par votre nom de base de données
 
+// Création de la connexion
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Récupérer les tickets depuis la base de données
-$query = "SELECT * FROM table_ticket";  // Modifié pour utiliser la table "table_ticket"
-$result = mysqli_query($conn, $query);
-
-// Vérifier si des tickets existent
-if (mysqli_num_rows($result) > 0) {
-    // Afficher les tickets dans une table HTML
-    echo "<table border='1'>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Statut</th>
-                    <th>Priorité</th>
-                    <th>Categorie</th>
-                </tr>
-            </thead>
-            <tbody>";
-    
-    // Parcourir chaque ticket et afficher les données dans un tableau
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>
-                <td>" . htmlspecialchars($row['id']) . "</td>
-                <td>" . htmlspecialchars($row['titre']) . "</td>
-                <td>" . htmlspecialchars($row['description']) . "</td>
-                <td>" . htmlspecialchars($row['statut']) . "</td>
-                <td>" . htmlspecialchars($row['priorite']) . "</td>
-                <td>" . htmlspecialchars($row['categorie']) . "</td>
-              </tr>";
-    }
-
-    echo "</tbody></table>";
-} else {
-    // Si aucun ticket n'est trouvé
-    echo "Aucun ticket trouvé.";
+// Vérification de la connexion
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Fermer la connexion
-mysqli_close($conn);
+// Requête SQL pour récupérer les tickets
+$sql = "SELECT 
+            id_ticket, 
+            titre, 
+            description, 
+            crée_par, 
+            date_crea, 
+            statut, 
+            priorite, 
+            date_reso, 
+            categorie, 
+            commentaire_resolution, 
+            historique_action, 
+            action_ticket 
+        FROM table_ticket";
+$result = $conn->query($sql);
+
+// Vérification des résultats
+$tickets = [];
+if ($result->num_rows > 0) {
+    // Récupération des données sous forme de tableau associatif
+    while($row = $result->fetch_assoc()) {
+        $tickets[] = $row;
+    }
+}
+
+// Retourner les tickets sous forme de JSON
+header('Content-Type: application/json');
+echo json_encode($tickets);
+
+// Fermeture de la connexion
+$conn->close();
 ?>
