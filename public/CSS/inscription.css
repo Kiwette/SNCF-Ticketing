@@ -1,0 +1,124 @@
+/* Style global de la page */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e6e6e6;
+    margin: 0;
+    padding: 0;
+    color: #00205b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Conteneur du formulaire d'inscription */
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: #00205b;
+    margin-top: 50px;
+  }
+  
+  /* Formulaire */
+  form {
+    background-color: #f9f9f9;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  form label {
+    font-size: 1.8rem;
+    color: #00205b;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  form input[type="text"],
+  form input[type="password"],
+  form select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    font-size: 1.6rem;
+    background-color: #e6e6e6;
+    transition: background-color 0.3s ease;
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="password"]:focus,
+  form select:focus {
+    outline: none;
+    border-color: #82BE00;
+    background-color: #fff;
+  }
+  
+  form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #82BE00;
+    color: white;
+    font-size: 1.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button[type="submit"]:hover {
+    background-color: #6da100;
+  }
+  
+  form p {
+    text-align: center;
+    font-size: 1.6rem;
+  }
+  
+  form p a {
+    color: #00205b;
+    text-decoration: none;
+  }
+  
+  form p a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Message d'erreur */
+  p {
+    color: red;
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 20px 0;
+  }
+  
+  /* Responsive design pour les petits écrans */
+  @media (max-width: 768px) {
+    form {
+      padding: 30px;
+      width: 90%;
+    }
+  
+    form label {
+      font-size: 1.6rem;
+    }
+  
+    form input[type="text"],
+    form input[type="password"],
+    form select {
+      font-size: 1.4rem;
+    }
+  
+    form button[type="submit"] {
+      font-size: 1.6rem;
+    }
+  
+    form p {
+      font-size: 1.4rem;
+    }
+  }
+  

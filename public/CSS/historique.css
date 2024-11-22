@@ -1,0 +1,141 @@
+body {
+    margin: 0 auto;
+    background-color: #e6e6e6;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 280px;
+    width: 100%;
+    border: solid;
+    background-color: #00205b;
+    border-color: #00205b;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 4em;
+    text-align: center;
+    color: #e6e6e6;
+  }
+  
+  .logo_sncf {
+    height: 470px;
+    width: 450px;
+  }
+  
+  .nav {
+    list-style-type: none;
+    padding: 1%;
+    margin-top: 200px;
+  }
+  
+  .nav li {
+    display: inline;
+    margin: 0 50px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #e6e6e6;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+  
+  /* SECTION Historique */
+  .historique-container {
+    background-color: #fff;
+    padding: 40px;
+    max-width: 900px;
+    margin: 50px auto;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+  }
+  
+  .titre2 {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #00205b;
+  }
+  
+  .description {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  
+  .historique-list {
+    margin-top: 20px;
+  }
+  
+  .historique-item {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .action-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00205b;
+  }
+  
+  .action-date {
+    font-size: 1.6rem;
+    color: #7d7d7d;
+  }
+  
+  .action-status {
+    font-size: 1.6rem;
+  }
+  
+  .status-complete {
+    color: #6fae00;
+    font-weight: bold;
+  }
+  
+  .status-pending {
+    color: #ff6347;
+    font-weight: bold;
+  }
+  
+  /* FOOTER */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 280px;
+    background-color: #00205b;
+    color: white;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer h3 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  .footer-link {
+    color: #e6e6e6;
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    color: #82BE00;
+  }
+  

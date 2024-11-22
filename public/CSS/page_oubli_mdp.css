@@ -1,0 +1,237 @@
+body{
+  margin: 0 auto;
+  background-color: #e6e6e6;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+
+.presentation {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00205b;
+  font-size: 2rem;
+  padding: 0 5vw;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  text-align: center;
+  margin-left: 200px;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+/* Animation de fade-in */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+h3 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 2rem;
+  background-color: #00205b;
+}
+ 
+
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 280px;
+  width: 100%;
+  border: solid;
+  background-color: #00205b;
+  border-color: #00205b;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 4em;
+  text-align: center;
+  color: #e6e6e6;
+  transition: transform 0.3s ease;
+  margin-right: 200px;
+}
+
+.header:hover h1 {
+  transform: scale(1.05); /* Effet d'agrandissement sur le titre */
+}
+
+
+/* Logo */
+.logo_sncf {
+  height: 470px;
+  width: 450px;
+  transition: transform 0.3s ease;
+}
+
+.logo_sncf:hover {
+  transform: rotate(10deg); /* Effet de rotation au survol */
+}
+
+
+ /* Menu de navigation */
+.nav {
+  list-style-type: none;
+  padding: 1%;
+  margin-top: 200px;
+  transition: transform 0.3s ease;
+}
+
+.nav li {
+  display: inline;
+  margin: 0 50px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #e6e6e6;
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav a:hover {
+  color: #82BE00;
+  transform: translateY(-5px); /* Effet de soulèvement au survol */
+}
+
+
+.Bienvenue {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.Bienvenue h2.titre2 {
+  font-size: 4rem;
+  color: #00205b;
+  margin-top: 100px;
+}
+
+ .titre2{
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  margin-left: 300px;
+ }
+
+ /* FORMULAIRE*/
+
+ form {
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto 0; 
+  padding: 80px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  margin-left: 2300px;
+  margin-top: 400px;
+}
+
+      form .form-title {
+        color: #82be00;
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      form .inputs input {
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        margin-bottom: 25px;
+        outline: none;
+        font-size: 1.6rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      form button {
+        padding: 15px 50px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.5rem;
+        color: #ffffff;
+        background-color: #82be00;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        width: 100%;
+        max-width: 500px;
+        margin-top: 40px;
+      }
+
+      form button:hover {
+        background-color: #6fae00;
+        transform: scale(1.02);
+      }
+
+      .info-text {
+        font-size: 2rem;
+        color: #00205b;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+
+
+   /* FOOTER */
+.footer {
+  height: 280px;
+  background-color: #00205b;
+  color: white;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  margin: 0; 
+  padding: 0; 
+  margin-top: 20px; 
+}     
+
+.footer h3 {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.logo_sncf2 {
+  position: absolute;     
+  left: 10px; 
+  bottom: 10px; 
+  width: 380px;
+  height: auto;
+}
+
+.footer-link {
+  color: #e6e6e6; 
+  text-decoration: none; 
+}
+
+.footer-link:hover {
+  color: #6fae00;
+}
+
+    

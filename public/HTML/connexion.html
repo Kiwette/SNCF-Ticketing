@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Je me connecte</title>
+    <link rel="stylesheet" href="/public/CSS/connexion.css" />
+    <link rel="stylesheet" href="/public/JS/connexion.js"
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <section>
+      <header class="header">
+        <img class="logo_sncf" src="/Images/logo.news.png" alt="logo_sncf" />
+        <div class="presentation">
+          <h1 class="titre_principal"><span style="color: #82be00">S</span>NCF TICKETING</h1>
+        </div>
+        <nav class="nav">
+          <li><a href="/public/HTML/Page_accueil.html">Accueil</a></li>
+        </nav>
+      </header>
+
+      <div class="Bienvenue">
+        <h2 class="titre2">Je me connecte à mon espace :<span style="color: #82be00"> SNCF Ticketing </span></h2>
+      </div>
+
+      <!-- Formulaire de connexion -->
+      <form id="loginForm" action="/PHP/login.php" method="POST">
+        <h1 class="form-title">Je me connecte à mon compte</h1>
+
+        <div class="inputs">
+          <label for="email">E-mail *</label>
+          <input type="email" id="email" name="email" placeholder="Mon adresse mail" required />
+
+          <label for="cp">Numéro de CP*</label>
+          <input type="text" id="cp" name="cp" placeholder="Numéro de CP" maxlength="8" required />
+
+          <div class="inputs">
+            <label for="password">Mot de passe *</label>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required />
+            <span id="togglePassword" class="fa fa-eye"></span> 
+          </div>        
+        </div>
+
+        <a href="/public/assets/HTML/page_oubli_mdp.html" class="forgot-password">J'ai oublié mon mot de passe</a>
+        <button type="submit" class="submit-btn">Continuer</button>
+        <p class="create-account">
+          Je n'ai pas de compte. <a href="/public/HTML/page_creation_profil.html">Créer un compte</a> .
+        </p>
+      </form>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <img class="logo_sncf2" src="/Images/logo-removebg-preview.png" alt="logo SNCF"/>
+        <div class="contenu_footer">
+            <h3>SNCF Ticketing |
+                <a href="/version.html" class="footer-link">Version 1.1</a> |
+                <a href="/public/HTML/cgu.html" class="footer-link">CGU</a> |
+                <a href="/mentions.html" class="footer-link">Mentions légales</a> |
+                <a href="/publicHTML/page_contacts.html" class="footer-link">Contactez-nous</a> |
+                e-SNCF ©2024
+            </h3>
+        </div>
+      </footer>
+    </section>            
+  </body>
+</html>

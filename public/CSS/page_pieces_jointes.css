@@ -1,0 +1,194 @@
+body {
+    margin: 0 auto;
+    background-color: #e6e6e6;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 280px;
+    width: 100%;
+    border: solid;
+    background-color: #00205b;
+    border-color: #00205b;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 4em;
+    text-align: center;
+    color: #e6e6e6;
+  }
+  
+  .logo_sncf {
+    height: 470px;
+    width: 450px;
+  }
+  
+  .nav {
+    list-style-type: none;
+    padding: 1%;
+    margin-top: 200px;
+  }
+  
+  .nav li {
+    display: inline;
+    margin: 0 50px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #e6e6e6;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+  
+  /* BANNER */
+  .Bienvenue {
+    text-align: center;
+    margin-top: 80px;
+  }
+  
+  .titre2 {
+    font-size: 6rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+  
+  /* Pièces jointes Container */
+  .attachments-container {
+    background-color: #fff;
+    padding: 30px;
+    max-width: 800px;
+    margin: 50px auto;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+  }
+  
+  .attachments-title {
+    text-align: center;
+    font-size: 3rem;
+    color: #00205b;
+    margin-bottom: 40px;
+  }
+  
+  .uploaded-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #00205b;
+    margin-top: 40px;
+  }
+  
+  /* Formulaire de Téléchargement */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputs input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  form label {
+    font-size: 1.8rem;
+    color: #00205b;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .submit-btn {
+    background-color: #6fae00;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #00205b;
+  }
+  
+  /* Liste des fichiers téléchargés */
+  .uploaded-files {
+    margin-top: 30px;
+  }
+  
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .file-link {
+    font-size: 1.8rem;
+    color: #00205b;
+    text-decoration: none;
+  }
+  
+  .file-link:hover {
+    color: #6fae00;
+  }
+  
+  .delete-btn {
+    background-color: #ff6347;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: #ff4500;
+  }
+  
+  /* FOOTER */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 280px;
+    background-color: #00205b;
+    color: white;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer h3 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 10px 0;
+  }
+  
+  .footer-link {
+    color: #e6e6e6;
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    color: #82BE00;
+  }
+  

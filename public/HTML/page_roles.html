@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des Rôles - SNCF Ticketing</title>
+    <link rel="stylesheet" href="/public/CSS/gestion_roles.css"
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <section>
+      <header class="header">
+        <img class="logo_sncf" src="/Images/logo.news.png" alt="logo_sncf" />
+        <div class="presentation">
+          <h1 class="titre_principal"><span style="color: #82be00">S</span>NCF TICKETING</h1>
+        </div>
+        <nav class="nav">
+          <li><a href="/public/HTML/Page_accueil.html">Accueil</a></li>
+          <li><a href="/public/HTML/page_connexion.html">Se connecter</a></li>
+        </nav>
+      </header>
+
+      <div class="Bienvenue">
+        <h2 class="titre2">Gestion des Rôles</h2>
+      </div>
+
+      <div class="table-container">
+        <h1 class="table-title">Liste des Rôles</h1>
+        
+        <!-- Table des rôles -->
+        <table>
+          <thead>
+            <tr>
+              <th>Nom du Rôle</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Exemple d'une ligne de rôle -->
+            <tr>
+              <td>Administrateur</td>
+              <td>Accès complet au système et gestion des utilisateurs.</td>
+              <td>
+                <button class="edit-btn">Modifier</button>
+                <button class="delete-btn">Supprimer</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Utilisateur</td>
+              <td>Accès limité aux fonctionnalités standards du système.</td>
+              <td>
+                <button class="edit-btn">Modifier</button>
+                <button class="delete-btn">Supprimer</button>
+              </td>
+            </tr>
+            <!-- Plus de rôles peuvent être ajoutés ici -->
+          </tbody>
+        </table>
+
+        <button class="add-btn">Ajouter un Rôle</button>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <img class="logo_sncf2" src="/Images/logo-removebg-preview.png" alt="logo SNCF"/>
+        <div class="contenu_footer">
+            <h3>SNCF Ticketing |
+                <a href="/version.html" class="footer-link">Version 1.1</a> |
+                <a href="/public/HTML/cgu.html" class="footer-link">CGU</a> |
+                <a href="/mentions.html" class="footer-link">Mentions légales</a> |
+                <a href="/public/HTML/page_contacts.html" class="footer-link">Contactez-nous</a> |
+                e-SNCF ©2024
+            </h3>
+        </div>
+      </footer>
+    </section>            
+  </body>
+</html>

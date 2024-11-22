@@ -1,49 +1,54 @@
 <?php
-// Connexion à la base de données
-require 'db_connect.php';
-
 session_start();
 
-// Si la requête est un POST, traiter la connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer les valeurs envoyées par le formulaire.
+    $email = $_POST['email'] ?? '';
+    $cp = $_POST['cp'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Vérifier la validité du jeton CSRF
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("Erreur CSRF.");
-    }
-
-    // Récupérer et valider les données du formulaire
-    $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
-    $password = $_POST['password'];
-
-    // Requête pour récupérer l'utilisateur par mail
-    $sql = "SELECT * FROM table_utilisateur WHERE mail = :mail";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':mail', $mail);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Vérifier le mot de passe et l’existence de l’utilisateur
-    if ($user && password_verify($password, $user['mot_de_passe'])) {
-        // Connexion réussie, créer une session sécurisée
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_mail'] = $user['mail'];
-        $_SESSION['user_role'] = $user['role']; // Stocker le rôle de l'utilisateur
-
-        // Générer un nouveau jeton CSRF pour la session
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-        echo "Connexion réussie";
-
-        // Rediriger l'utilisateur vers la page d'accueil ou le tableau de bord
-        header("Location: dashboard.php");
+    // Validation des champs.
+    if (empty($email) || empty($cp) || empty($password)) {
+        echo "<script>alert('Tous les champs doivent être remplis !'); window.history.back();</script>";
         exit();
-    } else {
-        echo "Identifiants incorrects"; // Message générique pour éviter de donner trop d'informations
     }
-} else {
-    // Générer un jeton CSRF pour le formulaire
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+    // Validation de l'email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('Adresse email invalide !'); window.history.back();</script>";
+        exit();
+    }
+
+    // Connexion à la base de données
+    $db = new mysqli('localhost', 'user', 'password', 'db_name'); // Changez les valeurs pour votre configuration
+    if ($db->connect_error) {
+        die("Échec de la connexion à la base de données : " . $db->connect_error);
+    }
+
+    // Requête préparée pour récupérer l'utilisateur avec son email et code postal
+    $stmt = $db->prepare("SELECT * FROM users WHERE email = ? AND cp = ?");
+    $stmt->bind_param("ss", $email, $cp);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Vérification du mot de passe
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            // Le mot de passe est correct, on connecte l'utilisateur
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            header("Location: /public/HTML/Page_accueil.html");
+            exit();
+        } else {
+            echo "<script>alert('Mot de passe incorrect !'); window.history.back();</script>";
+        }
+    } else {
+        echo "<script>alert('Identifiants incorrects !'); window.history.back();</script>";
+    }
+
+    $stmt->close();
+    $db->close();
 }
 ?>
 
@@ -51,20 +56,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="/public/CSS/login.css">
 </head>
 <body>
-    <h1>Connexion</h1>
-    <form method="POST" action="login.php">
-        <label for="mail">Email :</label>
-        <input type="email" id="mail" name="mail" required>
-        <br>
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <!-- Inclure le jeton CSRF dans le formulaire -->
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']); ?>">
+
+    <h1>Se connecter</h1>
+
+    <!-- Formulaire de connexion -->
+    <form action="connexion.php" method="POST">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required placeholder="Entrez votre e-mail">
+
+        <label for="cp">Code postal</label>
+        <input type="text" id="cp" name="cp" required placeholder="Entrez votre code postal">
+
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+
         <button type="submit">Se connecter</button>
     </form>
+
+    <p>Vous n'avez pas de compte ? <a href="inscription.php">Créez-en un ici</a></p>
+
 </body>
 </html>

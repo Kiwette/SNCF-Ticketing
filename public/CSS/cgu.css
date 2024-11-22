@@ -1,0 +1,166 @@
+/* BODY */
+body {
+  margin: 0 auto;
+  background-color: #e6e6e6;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 280px;
+  width: 100%;
+  border: solid;
+  background-color: #00205b;
+  border-color: #00205b;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 6em;
+  text-align: center;
+  color: #e6e6e6;
+  transition: transform 0.3s ease;
+}
+
+.header:hover h1 {
+  transform: scale(1.05); /* Effet d'agrandissement sur le titre */
+}
+
+/* Logo */
+.logo_sncf {
+  height: 470px;
+  width: 450px;
+  transition: transform 0.3s ease;
+}
+
+.logo_sncf:hover {
+  transform: rotate(10deg); /* Effet de rotation au survol */
+}
+
+/* Menu de navigation */
+.nav {
+  list-style-type: none;
+  padding: 1%;
+  margin-top: 200px;
+  transition: transform 0.3s ease;
+}
+
+.nav li {
+  display: inline;
+  margin: 0 50px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #e6e6e6;
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav a:hover {
+  color: #82BE00;
+  transform: translateY(-5px); /* Effet de soulèvement au survol */
+}
+
+/* CONDITIONS GENERALES D'UTILISATION (CGU) */
+.BlocGénéral {
+  margin: 40px auto;
+  width: 80%;
+}
+
+.Bienvenue {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.titre2 {
+  font-size: 4rem;
+  color: #00205b;
+}
+
+.Decription {
+  background-color: #e6e6e6;
+  padding: 40px;
+  border: 1px solid #82BE00;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  width: 80%;
+  max-width: 4500px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease; 
+  margin-left: 500px;
+  margin-top: 100px;
+}
+
+.Decription:hover {
+  transform: scale(1.05); /* Légère mise en avant au survol */
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); /* Ombre portée qui devient plus prononcée */
+  border-color: #82BE00; /* Maintien de la bordure verte */
+}
+.cgu-section {
+  margin-bottom: 25px;
+}
+
+.cgu-section h3 {
+  font-size: 2.5rem;
+  color: #82BE00;
+  margin-bottom: 10px;
+}
+
+.cgu-section p {
+  font-size: 2rem;
+  line-height: 1.6;
+  color: #00205b;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 280px;
+  background-color: #00205b;
+  color: white;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.footer h3 {
+  font-size: 2rem;
+  color: white;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.logo_sncf2 {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 380px;
+  height: auto;
+}
+
+.footer-link {
+  color: #e6e6e6;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #82BE00;
+  text-decoration: none;
+}

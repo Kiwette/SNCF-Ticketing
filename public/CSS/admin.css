@@ -1,0 +1,179 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 280px;
+    width: 100%;
+    background-color: #00205b;
+    padding: 20px;
+  }
+  
+  .logo_sncf {
+    height: 80px;
+    width: auto;
+  }
+  
+  .titre_principal {
+    color: #fff;
+    font-size: 3.5em;
+    margin: 0;
+  }
+  
+  .nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 1%;
+  }
+  
+  .nav li {
+    display: inline;
+    margin: 0 30px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+  }
+  
+  /* DASHBOARD */
+  .dashboard-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00205b;
+  }
+  
+  .dashboard-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  
+  .stat-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .stat-box h3 {
+    font-size: 2rem;
+    color: #00205b;
+  }
+  
+  .stat-box p {
+    font-size: 1.5rem;
+    color: #82be00;
+  }
+  
+  /* TABLEAUX UTILISATEURS */
+  .manage-users h3 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .manage-users table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .manage-users th, .manage-users td {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .manage-users th {
+    background-color: #00205b;
+    color: #fff;
+  }
+  
+  .manage-users td {
+    background-color: #f9f9f9;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #82be00;
+    color: #fff;
+    font-size: 1.2rem;
+    border-radius: 5px;
+  }
+  
+  .delete-btn {
+    background-color: #ff6f61;
+  }
+  
+  .edit-btn:hover, .delete-btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* GESTION BILLETS ET RESERVATIONS */
+  .manage-tickets, .manage-reservations {
+    margin-bottom: 40px;
+  }
+  
+  .manage-tickets button, .manage-reservations button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background-color: #82be00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 20px;
+  }
+  
+  .manage-tickets button:hover, .manage-reservations button:hover {
+    background-color: #6fae00;
+  }
+  
+  /* FOOTER */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00205b;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer h3 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  .footer-link {
+    color: #e6f7ff;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  

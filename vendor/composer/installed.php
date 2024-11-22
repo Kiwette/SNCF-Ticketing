@@ -3,7 +3,7 @@
         'name' => 'votre-utilisateur/sncf-ticketing',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fe376874f0b8c32c7c5d0b169555dda0a0002b0b',
+        'reference' => 'bb395ad99aa3e6e7de8164ff5b28cc227441f8aa',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -94,7 +94,7 @@
         'votre-utilisateur/sncf-ticketing' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fe376874f0b8c32c7c5d0b169555dda0a0002b0b',
+            'reference' => 'bb395ad99aa3e6e7de8164ff5b28cc227441f8aa',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
