@@ -1,10 +1,12 @@
 <?php
 session_start(); // Démarrer la session pour vérifier l'authentification
 
+// Inclure le fichier d'authentification pour vérifier les droits de l'utilisateur
+require_once('auth.php');
+
 // Vérification si l'utilisateur est authentifié et est un administrateur ou un agent de support
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'support')) {
-    die("Accès non autorisé.");
-}
+check_logged_in();
+check_admin(); // Assurez-vous que l'utilisateur est soit admin soit support
 
 // Connexion à la base de données
 $dsn = 'mysql:host=localhost;dbname=sncf_ticketing;charset=utf8';

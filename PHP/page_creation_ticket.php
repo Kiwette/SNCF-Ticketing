@@ -1,4 +1,14 @@
 <?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+    header("Location: connexion.php");
+    exit;
+}
+
 // Connexion à la base de données
 require_once 'config/db_connect.php';
 
@@ -48,11 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création Ticket</title>
-    <!-- Lien vers votre fichier CSS -->
     <link rel="stylesheet" href="/public/CSS/page_creation_tickets.css">
 </head>
 <body>
-    <!-- Votre formulaire de création de ticket -->
     <div class="form-container">
         <h4>Créer un nouveau ticket</h4>
         <hr>

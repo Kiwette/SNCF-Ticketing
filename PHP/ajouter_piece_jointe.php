@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once 'auth.php'; // Ajout du fichier auth.php pour vérifier l'authentification
+
 require_once 'config/db_connect.php';
 
 // Vérification de l'envoi de données via le formulaire POST
@@ -7,11 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     $ticket_id = $_POST['ticket_id'];  // ID du ticket pour lequel l'attachement est effectué
     $ajoute_par = $_POST['ajoute_par'];  // ID de l'utilisateur ajoutant le fichier
 
+    // Sécuriser les variables
+    $ticket_id = (int)$ticket_id;
+    $ajoute_par = (int)$ajoute_par;
+
     // Validation du fichier téléchargé
     if ($file['error'] == 0) {
         // Dossier où les fichiers seront stockés
         $target_dir = "uploads/tickets/" . $ticket_id . "/";
-        
+
         // Créer le dossier si nécessaire
         if (!is_dir($target_dir)) {
             mkdir($target_dir, 0777, true);
@@ -19,19 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
 
         // Définir le chemin complet du fichier
         $target_file = $target_dir . basename($file['name']);
-        
+
         // Vérification de l'extension et de la taille du fichier
         $extensions_valides = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'docx'];
         $type_fichier = pathinfo($file['name'], PATHINFO_EXTENSION);
         $taille_max = 5 * 1024 * 1024; // 5 Mo maximum
 
         if (!in_array(strtolower($type_fichier), $extensions_valides)) {
-            echo "<script>alert('Type de fichier non autorisé.'); window.history.back();</script>";
+            echo "<script>alert('Type de fichier non autorisé.'); window.location.href = 'ticket_details.php?ticket_id=" . $ticket_id . "';</script>";
             exit();
         }
 
         if ($file['size'] > $taille_max) {
-            echo "<script>alert('Le fichier est trop volumineux. Taille maximale : 5 Mo.'); window.history.back();</script>";
+            echo "<script>alert('Le fichier est trop volumineux. Taille maximale : 5 Mo.'); window.location.href = 'ticket_details.php?ticket_id=" . $ticket_id . "';</script>";
             exit();
         }
 
@@ -53,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
             // Confirmation du téléchargement
             echo "<script>alert('Fichier téléchargé avec succès!'); window.location.href = 'ticket_details.php?ticket_id=" . $ticket_id . "';</script>";
         } else {
-            echo "<script>alert('Erreur lors du téléchargement du fichier.'); window.history.back();</script>";
+            echo "<script>alert('Erreur lors du téléchargement du fichier.'); window.location.href = 'ticket_details.php?ticket_id=" . $ticket_id . "';</script>";
         }
     } else {
-        echo "<script>alert('Aucun fichier n\'a été téléchargé.'); window.history.back();</script>";
+        echo "<script>alert('Aucun fichier n\'a été téléchargé.'); window.location.href = 'ticket_details.php?ticket_id=" . $ticket_id . "';</script>";
     }
 }
 

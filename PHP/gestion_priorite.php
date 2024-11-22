@@ -1,13 +1,9 @@
 <?php
-// Démarrer la session
-session_start();
+// Inclure le fichier d'authentification
+require_once('auth.php');
 
-// Vérifier si l'utilisateur est connecté et s'il a les droits d'administrateur
-if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
-    // Si l'utilisateur n'est pas connecté ou n'est pas un admin, rediriger vers la page d'accueil
-    header("Location: index.php");
-    exit;
-}
+// Vérification de l'authentification et des droits d'administrateur
+check_admin();
 
 // Inclure le fichier de connexion à la base de données
 require_once('db_connect.php');
@@ -101,13 +97,13 @@ if (isset($_POST['update_priorite'])) {
                 echo "<td>" . $priorite['Description'] . "</td>";
                 echo "<td>
                         <!-- Formulaire pour supprimer une priorité -->
-                        <form method='POST' style='display:inline;'>
+                        <form method='POST' style='display:inline;' action='gestion_priorites.php'>
                             <input type='hidden' name='priorite_id' value='" . $priorite['Priorite_id'] . "'>
                             <button type='submit' name='delete_priorite' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette priorité ?\");'>Supprimer</button>
                         </form>
                         
                         <!-- Formulaire pour mettre à jour une priorité -->
-                        <form method='POST' style='display:inline;'>
+                        <form method='POST' style='display:inline;' action='gestion_priorites.php'>
                             <input type='hidden' name='priorite_id' value='" . $priorite['Priorite_id'] . "'>
                             <input type='text' name='new_priorite_name' value='" . $priorite['Nom'] . "' required>
                             <textarea name='new_description' required>" . $priorite['Description'] . "</textarea>

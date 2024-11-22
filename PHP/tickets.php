@@ -1,12 +1,18 @@
 <?php
+// Démarrer la session
 session_start();
-require 'config/db_connect.php'; // Connexion à la base de données
 
-// Vérification de l'authentification
+// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    die('Utilisateur non authentifié.');
+    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+    header("Location: connexion.php");
+    exit;
 }
 
+// Inclure la connexion à la base de données
+require 'config/db_connect.php';
+
+// Message d'alerte à afficher
 $message = '';
 
 // Gestion des actions de mise à jour de ticket

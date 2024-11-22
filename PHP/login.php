@@ -1,13 +1,20 @@
 <?php
 session_start();
 
+// Vérifier si l'utilisateur est déjà connecté
+if (isset($_SESSION['user_id'])) {
+    // Si l'utilisateur est déjà connecté, rediriger vers la page d'accueil
+    header("Location: /public/HTML/Page_accueil.html");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les valeurs envoyées par le formulaire.
+    // Récupérer les valeurs envoyées par le formulaire
     $email = $_POST['email'] ?? '';
     $cp = $_POST['cp'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Validation des champs.
+    // Validation des champs
     if (empty($email) || empty($cp) || empty($password)) {
         echo "<script>alert('Tous les champs doivent être remplis !'); window.history.back();</script>";
         exit();
@@ -58,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <!-- Lien vers le fichier CSS externe -->
     <link rel="stylesheet" href="/public/CSS/login.css">
 </head>
 <body>

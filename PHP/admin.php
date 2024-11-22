@@ -1,10 +1,16 @@
 <?php
-// Démarrer la session
 session_start();
 
-// Vérifier si l'utilisateur est connecté et si c'est un administrateur
-if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
-    // Si l'utilisateur n'est pas un admin, rediriger vers la page d'accueil
+// Vérifiez si l'utilisateur est connecté et s'il a le bon rôle
+if (!isset($_SESSION['user_id'])) {
+    // Si l'utilisateur n'est pas connecté, redirigez vers la page de connexion
+    header("Location: connexion.php");
+    exit;
+}
+
+// Vérifiez le rôle de l'utilisateur
+if ($_SESSION['role'] !== 'Administrateur') {
+    // Si l'utilisateur n'est pas un administrateur, redirigez vers une page d'erreur ou vers l'accueil
     header("Location: index.php");
     exit;
 }
@@ -20,21 +26,31 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
 </head>
 <body>
 
-    <h1>Panneau d'Administration</h1>
+    <header>
+        <h1>Panneau d'Administration</h1>
+        <!-- Ajouter un bouton de déconnexion -->
+        <a href="deconnexion.php">Déconnexion</a>
+    </header>
 
-    <h2>Gestion des Tickets</h2>
-    <ul>
-        <li><a href="page_tickets.php">Voir les tickets</a></li>
-        <li><a href="gestion_priorites.php">Gérer les priorités</a></li>
-        <li><a href="gestion_categories.php">Gérer les catégories</a></li>
-        <li><a href="gestion_statuts.php">Gérer les statuts</a></li>
-    </ul>
+    <main>
+        <section>
+            <h2>Gestion des Tickets</h2>
+            <ul>
+                <li><a href="page_tickets.php">Voir les tickets</a></li>
+                <li><a href="gestion_priorites.php">Gérer les priorités</a></li>
+                <li><a href="gestion_categories.php">Gérer les catégories</a></li>
+                <li><a href="gestion_statuts.php">Gérer les statuts</a></li>
+            </ul>
+        </section>
 
-    <h2>Gestion des Utilisateurs</h2>
-    <ul>
-        <li><a href="gestion_utilisateurs.php">Voir les utilisateurs</a></li>
-        <li><a href="gestion_roles.php">Gérer les rôles</a></li>
-    </ul>
+        <section>
+            <h2>Gestion des Utilisateurs</h2>
+            <ul>
+                <li><a href="gestion_utilisateurs.php">Voir les utilisateurs</a></li>
+                <li><a href="gestion_roles.php">Gérer les rôles</a></li>
+            </ul>
+        </section>
+    </main>
 
 </body>
 </html>

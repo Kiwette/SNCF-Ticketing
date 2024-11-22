@@ -1,11 +1,11 @@
 <?php
 session_start();
 
+// Inclure le fichier d'authentification
+require_once('auth.php');
+
 // Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_id'])) {
-    header("Location: connexion.php");
-    exit;
-}
+check_logged_in();
 
 // Inclure le fichier de connexion à la base de données
 require_once('db_connect.php');

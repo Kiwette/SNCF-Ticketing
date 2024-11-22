@@ -1,10 +1,20 @@
 <?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    // Si l'utilisateur n'est pas connecté, envoyer un code de statut 401 (non autorisé)
+    http_response_code(401); // Unauthorized
+    echo json_encode(["error" => "Utilisateur non connecté."]);
+    exit;
+}
+
 // Configuration de la connexion à la base de données
 $host = 'localhost';     // Hôte de la base de données
 $dbname = 'sncf_ticketing';   // Nom de la base de données
 $username = 'root';      // Nom d'utilisateur pour la base de données
-$password = '';          // Mot de passe de l'utilisateur (laisser vide pour localhost)
-
+$password = '';         
 // Créer une connexion avec PDO
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

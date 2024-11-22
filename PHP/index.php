@@ -13,17 +13,16 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $user_role = $_SESSION['role']; // par exemple, 'utilisateur', 'admin'
 
-// Inclure la page d'accueil statique (HTML)
+// Inclure la page d'accueil statique (HTML) en fonction de l'utilisateur
 include('/public/HTML/Page_acceuil.html');
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historique des Actions</title>
+    <title>Page d'Accueil</title>
     <link rel="stylesheet" href="/public/CSS/index.css">
 </head>
 <body>
@@ -39,9 +38,8 @@ include('/public/HTML/Page_acceuil.html');
     <ul>
         <li><a href="/PHP/tickets.php">Voir les Tickets</a></li>
         <li><a href="/PHP/gestion_utilisateurs.php">Gérer les Utilisateurs</a></li>
-        <li><a href="/PHP/connexion.php">Se déconnecter</a></li>
+        <li><a href="/PHP/logout.php">Se déconnecter</a></li>
     </ul>
 </nav>
-
 </body>
 </html>

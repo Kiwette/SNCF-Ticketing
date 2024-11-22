@@ -1,13 +1,9 @@
 <?php
-// Démarrer la session
-session_start();
+// Inclure le fichier d'authentification
+require_once('auth.php');
 
-// Vérifier si l'utilisateur est connecté et s'il a les droits d'administrateur
-if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
-    // Si l'utilisateur n'est pas connecté ou n'est pas un admin, rediriger vers la page d'accueil
-    header("Location: index.php");
-    exit;
-}
+// Vérification de l'authentification et des droits d'administrateur
+check_admin();
 
 // Inclure le fichier de connexion à la base de données
 require_once('db_connect.php');
@@ -64,7 +60,7 @@ if (isset($_POST['delete_piece_jointe'])) {
                 echo "<td>" . $piece['Date_ajout'] . "</td>";
                 echo "<td>
                         <!-- Formulaire pour supprimer une pièce jointe -->
-                        <form method='POST' style='display:inline;'>
+                        <form method='POST' style='display:inline;' action='gestion_pieces_jointes.php'>
                             <input type='hidden' name='piece_id' value='" . $piece['Piece_jointe_id'] . "'>
                             <button type='submit' name='delete_piece_jointe' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer cette pièce jointe ?\");'>Supprimer</button>
                         </form>

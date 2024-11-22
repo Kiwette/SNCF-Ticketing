@@ -2,6 +2,9 @@
 // Démarrer la session
 session_start();
 
+// Inclure le fichier d'authentification
+require_once('auth.php'); // Vérification de la session, si l'utilisateur est déjà connecté, il sera redirigé
+
 // Inclure le fichier de connexion à la base de données
 require_once('db_connect.php');
 
@@ -23,15 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Vérifier si l'utilisateur existe et que le mot de passe est correct
         if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
             // Démarrer la session et enregistrer les informations de l'utilisateur
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['nom'] = $user['nom'];
-            $_SESSION['prenom'] = $user['prenom'];
-            $_SESSION['role'] = $user['role'];
+            $_SESSION['user_id'] = $user['user_id']; // ID de l'utilisateur
+            $_SESSION['nom'] = $user['nom'];         // Nom de l'utilisateur
+            $_SESSION['prenom'] = $user['prenom'];   // Prénom de l'utilisateur
+            $_SESSION['role'] = $user['role'];       // Rôle de l'utilisateur
 
             // Rediriger l'utilisateur vers la page d'accueil ou une page protégée
             header("Location: page_acceuil.php");
             exit;
         } else {
+            // Afficher un message d'erreur en cas d'identifiants incorrects
             $error = "Numéro de CP ou mot de passe incorrect.";
         }
     }

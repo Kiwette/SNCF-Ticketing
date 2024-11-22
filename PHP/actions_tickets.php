@@ -1,4 +1,10 @@
 <?php
+session_start();
+require_once 'auth.php'; // Inclure le fichier d'authentification
+
+// Vérifiez que l'utilisateur est authentifié et a le bon rôle
+checkRole('Administrateur'); // Par exemple, vous pouvez vérifier si l'utilisateur est un administrateur
+
 require 'config/db_connect.php';
 
 // Définir un ticket_id (cela pourrait être récupéré dynamiquement via GET ou POST)

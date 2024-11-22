@@ -1,5 +1,12 @@
 <?php
-session_start();
+session_start(); // Démarrer la session
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+    header("Location: connexion.php");
+    exit();
+}
 
 // Inclure le fichier CSS pour la mise en forme de la page
 echo '<link rel="stylesheet" href="/public/CSS/process_form.php">';

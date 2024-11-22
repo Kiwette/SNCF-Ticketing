@@ -1,6 +1,12 @@
 <?php
+// Démarrer la session
+session_start();
+
+// Inclure le fichier d'authentification
+require_once('auth.php'); // Vérifie si l'utilisateur est connecté, sinon le redirige
+
 // Connexion à la base de données
-require_once('/config/db_connect.php'); 
+require_once('/config/db_connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données envoyées par le formulaire
@@ -23,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Vous devez accepter les conditions.";
     } else {
         // Vérifier si l'email existe déjà dans la base de données
-        $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT * FROM table_utilisateur WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
@@ -34,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = password_hash($mdp, PASSWORD_DEFAULT);
 
             // Préparer l'insertion des données dans la base de données
-            $sql = "INSERT INTO utilisateurs (nom, prenom, cp, email, mot_de_passe, date_creation) 
-                    VALUES (:nom, :prenom, :cp, :email, :mot_de_passe, NOW())";
+            $sql = "INSERT INTO table_utilisateur (nom, prenom, cp, email, mot_de_passe, date_crea_compte, role_id) 
+                    VALUES (:nom, :prenom, :cp, :email, :mot_de_passe, NOW(), 3)"; // 3 = rôle Utilisateur
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':prenom', $prenom);
@@ -60,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/CSS/creation_profil.css">
     <title>Création de Profil</title>
-    </head>
+</head>
 <body>
 
 <h1>Création de Profil</h1>

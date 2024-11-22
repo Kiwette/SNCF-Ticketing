@@ -1,11 +1,12 @@
 <?php
 session_start();
 
+// Inclure le fichier d'authentification
+require_once('auth.php');
+
 // Vérifier si l'utilisateur est connecté et s'il a les droits d'administrateur
-if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
-    header("Location: index.php");
-    exit;
-}
+check_logged_in();
+check_admin(); // Vérifie que l'utilisateur a le rôle administrateur (role_id = 1)
 
 // Inclure le fichier de connexion à la base de données
 require_once('db_connect.php');

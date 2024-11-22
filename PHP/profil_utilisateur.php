@@ -26,14 +26,23 @@ if (isset($_POST['update_profile'])) {
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
     $mot_de_passe = $_POST['mot_de_passe'];
-    
+
+    // Vérifier si le mot de passe a été modifié
+    if (!empty($mot_de_passe)) {
+        // Hacher le mot de passe avant de le stocker
+        $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_BCRYPT);
+    } else {
+        // Si le mot de passe n'est pas modifié, garder l'ancien mot de passe
+        $mot_de_passe_hash = $user['mot_de_passe'];
+    }
+
     // Mettre à jour le profil dans la base de données
     $update_query = "UPDATE utilisateurs SET nom = :nom, prenom = :prenom, email = :email, mot_de_passe = :mot_de_passe WHERE user_id = :user_id";
     $stmt_update = $pdo->prepare($update_query);
     $stmt_update->bindParam(':nom', $nom, PDO::PARAM_STR);
     $stmt_update->bindParam(':prenom', $prenom, PDO::PARAM_STR);
     $stmt_update->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt_update->bindParam(':mot_de_passe', $mot_de_passe, PDO::PARAM_STR);
+    $stmt_update->bindParam(':mot_de_passe', $mot_de_passe_hash, PDO::PARAM_STR);
     $stmt_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt_update->execute();
     
@@ -58,16 +67,17 @@ if (isset($_POST['update_profile'])) {
     <!-- Formulaire de mise à jour du profil -->
     <form method="POST" action="profil_utilisateur.php">
         <label for="nom">Nom:</label>
-        <input type="text" name="nom" value="<?php echo $user['nom']; ?>" required>
+        <input type="text" name="nom" value="<?php echo htmlspecialchars($user['nom']); ?>" required>
         
         <label for="prenom">Prénom:</label>
-        <input type="text" name="prenom" value="<?php echo $user['prenom']; ?>" required>
+        <input type="text" name="prenom" value="<?php echo htmlspecialchars($user['prenom']); ?>" required>
         
         <label for="email">Email:</label>
-        <input type="email" name="email" value="<?php echo $user['email']; ?>" required>
+        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
         
         <label for="mot_de_passe">Mot de Passe:</label>
-        <input type="password" name="mot_de_passe" required>
+        <input type="password" name="mot_de_passe">
+        <p><small>Laissez vide pour ne pas modifier le mot de passe.</small></p>
         
         <button type="submit" name="update_profile">Mettre à jour</button>
     </form>

@@ -2,6 +2,13 @@
 // Démarre la session
 session_start();
 
+// Vérifier si l'utilisateur est déjà connecté
+if (isset($_SESSION['user_id'])) {
+    // Si l'utilisateur est connecté, rediriger vers la page d'accueil
+    header("Location: /PHP/index.php");
+    exit;
+}
+
 // Inclure la connexion à la base de données
 require_once('db_connect.php');
 
@@ -24,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Sécuriser les données (par exemple, hachage du mot de passe)
         $mot_de_passe_hache = password_hash($mot_de_passe, PASSWORD_BCRYPT);
 
-        // Préparer la requête pour insérer l'utilisateur dans la base de données
+        // Préparer la requête pour vérifier si le numéro de CP existe déjà
         $stmt = $pdo->prepare("SELECT * FROM table_utilisateur WHERE num_cp = ?");
         $stmt->execute([$num_cp]);
         if ($stmt->rowCount() > 0) {
@@ -60,6 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Afficher les erreurs, si existantes
     if (isset($error)) {
         echo "<p style='color: red;'>$error</p>";
+    }
+
+    // Afficher le message de succès s'il y en a un
+    if (isset($_SESSION['success'])) {
+        echo "<p style='color: green;'>".$_SESSION['success']."</p>";
+        unset($_SESSION['success']);
     }
     ?>
 
