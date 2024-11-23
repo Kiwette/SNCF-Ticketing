@@ -1,11 +1,5 @@
 <?php
 
-namespace App\Controllers;
-
-use Firebase\JWT\JWT;
-use Slim\Http\Request;
-use Slim\Http\Response;
-
 class UserController {
 
     private $secretKey;

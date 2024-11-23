@@ -1,11 +1,9 @@
 <?php
-// Fichier pour se connecter à la base de données
-
 // Paramètres de connexion à la base de données
-$host = 'localhost'; // L'adresse de votre serveur MySQL
-$db_name = 'sncf_ticketing'; // Le nom de votre base de données
-$username = 'root'; // Votre utilisateur MySQL
-$password = ''; // Votre mot de passe MySQL
+$host = 'localhost'; 
+$db_name = 'sncf_ticketing'; 
+$username = 'root'; 
+$password = ''; 
 
 // Créer une instance de PDO pour la connexion à la base de données
 try {

@@ -11,10 +11,9 @@ function check_admin() {
     }
 }
 
-// Vous pouvez aussi créer une fonction pour vérifier si l'utilisateur est connecté en général
 function check_logged_in() {
     if (!isset($_SESSION['user_id'])) {
-        header("Location: connexion.php");  // Redirection vers la page de connexion
+        header("Location: connexion.html");  // Redirection vers la page de connexion
         exit;
     }
 }

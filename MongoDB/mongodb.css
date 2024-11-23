@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Tickets - MongoDB</title>
+    <link rel="stylesheet" href="/public/CSS/mongodb.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ajouter un Ticket (MongoDB)</h1>
+        <form method="POST" action="">
+            <label for="origin">Origine:</label>
+            <input type="text" name="origin" id="origin" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" name="destination" id="destination" required>
+
+            <label for="price">Prix:</label>
+            <input type="number" name="price" id="price" step="0.01" required>
+
+            <label for="departureTime">Heure de départ:</label>
+            <input type="datetime-local" name="departureTime" id="departureTime" required>
+
+            <button type="submit" name="ajouter_ticket">Ajouter le ticket</button>
+        </form>
+
+        <h2>Liste des Tickets</h2>
+        <ul>
+            <?php
+            // Inclure le fichier de gestion MongoDB
+            require 'mongo_manager.php';
+
+            // Récupérer et afficher les tickets
+            $tickets = obtenirTickets();
+            foreach ($tickets as $ticket) {
+                echo "<li>";
+                echo "Origine: " . htmlspecialchars($ticket['origin']) . " | ";
+                echo "Destination: " . htmlspecialchars($ticket['destination']) . " | ";
+                echo "Prix: " . htmlspecialchars($ticket['price']) . " € | ";
+                echo "Départ: " . htmlspecialchars(date('Y-m-d H:i:s', $ticket['departureTime']->toDateTime()->getTimestamp()));
+                echo "</li>";
+            }
+            ?>
+        </ul>
+    </div>
+</body>
+</html>

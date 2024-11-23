@@ -4,7 +4,6 @@ session_start();
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
     header("Location: connexion.php");
     exit;
 }
@@ -20,8 +19,10 @@ $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Mettre à jour les informations de l'utilisateur si le formulaire est soumis
-if (isset($_POST['update_profile'])) {
+// Traitement AJAX pour la mise à jour du profil
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax'])) {
+    header('Content-Type: application/json');
+
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
@@ -29,10 +30,8 @@ if (isset($_POST['update_profile'])) {
 
     // Vérifier si le mot de passe a été modifié
     if (!empty($mot_de_passe)) {
-        // Hacher le mot de passe avant de le stocker
         $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_BCRYPT);
     } else {
-        // Si le mot de passe n'est pas modifié, garder l'ancien mot de passe
         $mot_de_passe_hash = $user['mot_de_passe'];
     }
 
@@ -44,43 +43,12 @@ if (isset($_POST['update_profile'])) {
     $stmt_update->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt_update->bindParam(':mot_de_passe', $mot_de_passe_hash, PDO::PARAM_STR);
     $stmt_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt_update->execute();
-    
-    // Rediriger après la mise à jour
-    header("Location: profil_utilisateur.php");
+
+    if ($stmt_update->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Profil mis à jour avec succès.']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour du profil.']);
+    }
     exit;
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Profil</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body>
-
-    <h1>Mon Profil</h1>
-
-    <!-- Formulaire de mise à jour du profil -->
-    <form method="POST" action="profil_utilisateur.php">
-        <label for="nom">Nom:</label>
-        <input type="text" name="nom" value="<?php echo htmlspecialchars($user['nom']); ?>" required>
-        
-        <label for="prenom">Prénom:</label>
-        <input type="text" name="prenom" value="<?php echo htmlspecialchars($user['prenom']); ?>" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-        
-        <label for="mot_de_passe">Mot de Passe:</label>
-        <input type="password" name="mot_de_passe">
-        <p><small>Laissez vide pour ne pas modifier le mot de passe.</small></p>
-        
-        <button type="submit" name="update_profile">Mettre à jour</button>
-    </form>
-
-</body>
-</html>

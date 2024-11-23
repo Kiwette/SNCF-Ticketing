@@ -1,0 +1,56 @@
+<?php
+// Inclure le fichier de gestion MongoDB
+require 'mongo_manager.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $categorie = $_POST['categorie'];
+    $statut = $_POST['statut'];
+    $priorite = $_POST['priorite'];
+
+    // Ajouter le ticket à MongoDB
+    $ticketId = ajouterTicket($categorie, $statut, $priorite);
+
+    echo "Ticket ajouté avec succès ! (ID: " . $ticketId . ")";
+}
+
+// Récupérer et afficher les tickets
+$tickets = obtenirTickets();
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Ticket</title>
+</head>
+<body>
+    <h1>Ajouter un Ticket</h1>
+
+    <form method="POST">
+        <label for="categorie">Catégorie:</label>
+        <input type="text" name="categorie" required>
+        
+        <label for="statut">Statut:</label>
+        <input type="text" name="statut" required>
+        
+        <label for="priorite">Priorité:</label>
+        <input type="text" name="priorite" required>
+
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Liste des Tickets</h2>
+    <ul>
+        <?php
+        foreach ($tickets as $ticket) {
+            echo "<li>";
+            echo "Catégorie: " . htmlspecialchars($ticket['categorie']) . " | ";
+            echo "Statut: " . htmlspecialchars($ticket['statut']) . " | ";
+            echo "Priorité: " . htmlspecialchars($ticket['priorite']);
+            echo "</li>";
+        }
+        ?>
+    </ul>
+</body>
+</html>
