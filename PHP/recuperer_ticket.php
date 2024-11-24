@@ -4,7 +4,7 @@ session_start();
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    // Si l'utilisateur n'est pas connecté, envoyer un code de statut 401 (non autorisé)
+    
     http_response_code(401); // Unauthorized
     echo json_encode(["error" => "Utilisateur non connecté."]);
     exit;

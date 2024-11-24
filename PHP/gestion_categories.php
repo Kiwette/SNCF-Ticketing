@@ -13,7 +13,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
 }
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Récupérer la liste des catégories à partir de la base de données
 $query = "SELECT * FROM categories"; // Exemple de requête pour récupérer toutes les catégories

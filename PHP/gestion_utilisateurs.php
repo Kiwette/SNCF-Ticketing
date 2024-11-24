@@ -4,12 +4,30 @@ session_start();
 // Inclure le fichier d'authentification
 require_once('auth.php');
 
+// Inclure la classe Database
+require_once __DIR__ . '/app/config/Database.php';
+
+use App\Config\Database;
+
 // Vérifier si l'utilisateur est connecté et s'il a les droits d'administrateur
 check_logged_in();
 check_admin(); // Vérifie que l'utilisateur a le rôle administrateur (role_id = 1)
 
-// Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+// Créer une instance de la classe Database et obtenir la connexion
+$database = new Database();
+$pdo = $database->getConnection();
+
+// Vérification du jeton CSRF pour protéger contre les attaques CSRF
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("Erreur de validation CSRF !");
+    }
+}
+
+// Générer un jeton CSRF si ce n'est pas déjà fait
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Générer un jeton CSRF
+}
 
 // Ajouter un nouvel utilisateur
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
@@ -21,6 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
     $statut_compte = 'Actif';
     $date_creation = date('Y-m-d H:i:s');
 
+    // Validation de l'email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("L'email n'est pas valide.");
+    }
+
+    // Insertion de l'utilisateur dans la base de données
     $sql = "INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, role_id, statut_compte, date_creation) 
             VALUES (:nom, :prenom, :email, :mot_de_passe, :role_id, :statut_compte, :date_creation)";
     $stmt = $pdo->prepare($sql);
@@ -39,6 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_user'])) {
 // Supprimer un utilisateur
 if (isset($_POST['delete_user'])) {
     $user_id = $_POST['user_id'];
+    // Validation de l'ID utilisateur pour éviter toute injection SQL
+    if (!is_numeric($user_id)) {
+        die("ID utilisateur invalide.");
+    }
+
     $delete_query = "DELETE FROM utilisateurs WHERE user_id = :user_id";
     $stmt_delete = $pdo->prepare($delete_query);
     $stmt_delete->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -51,6 +80,11 @@ if (isset($_POST['delete_user'])) {
 if (isset($_POST['update_role'])) {
     $user_id = $_POST['user_id'];
     $new_role = $_POST['new_role'];
+
+    // Validation de l'ID utilisateur et du rôle pour éviter toute injection SQL
+    if (!is_numeric($user_id) || !in_array($new_role, [1, 2])) {
+        die("Données invalides.");
+    }
 
     $update_query = "UPDATE utilisateurs SET role_id = :new_role WHERE user_id = :user_id";
     $stmt_update = $pdo->prepare($update_query);
@@ -83,6 +117,8 @@ $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="form-container">
     <h2>Ajouter un Nouvel Utilisateur</h2>
     <form method="POST" action="">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
         <div>
             <label for="nom">Nom :</label>
             <input type="text" name="nom" id="nom" required>
@@ -144,12 +180,14 @@ $utilisateurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <!-- Supprimer un utilisateur -->
                     <form method="POST" style="display:inline;">
                         <input type="hidden" name="user_id" value="<?php echo $utilisateur['user_id']; ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <button type="submit" name="delete_user" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</button>
                     </form>
 
                     <!-- Mettre à jour le rôle -->
                     <form method="POST" style="display:inline;">
                         <input type="hidden" name="user_id" value="<?php echo $utilisateur['user_id']; ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <label for="new_role">Nouveau rôle</label>
                         <select name="new_role">
                             <option value="1" <?php echo $utilisateur['role_id'] == 1 ? 'selected' : ''; ?>>Administrateur</option>

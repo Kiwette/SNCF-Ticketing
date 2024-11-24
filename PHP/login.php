@@ -31,7 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($db->connect_error) {
         die("Échec de la connexion à la base de données : " . $db->connect_error);
     }
+    
+    session_regenerate_id(true); // Regénère l'ID de session
 
+    
     // Requête préparée pour récupérer l'utilisateur avec son email et code postal
     $stmt = $db->prepare("SELECT * FROM users WHERE email = ? AND cp = ?");
     $stmt->bind_param("ss", $email, $cp);

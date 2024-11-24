@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Récupérer la liste des tickets à partir de la base de données
 $query = "SELECT * FROM tickets"; // Exemple de requête pour récupérer tous les tickets

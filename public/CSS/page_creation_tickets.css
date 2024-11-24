@@ -218,6 +218,9 @@ button:hover {
 
 /* FOOTER */
 .footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   height: 280px;
   background-color: #00205b;
   color: white;
@@ -225,10 +228,9 @@ button:hover {
   position: fixed;
   width: 100%;
   bottom: 0;
-  margin: 0; 
-  padding: 0; 
-  margin-top: 20px; 
-}     
+  margin: 0;
+  padding: 0;
+}
 
 .footer h3 {
   font-size: 2rem;
@@ -238,21 +240,23 @@ button:hover {
 }
 
 .logo_sncf2 {
-  position: absolute;     
-  left: 10px; 
-  bottom: 10px; 
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
   width: 380px;
   height: auto;
 }
 
 .footer-link {
-  color: #e6e6e6; 
-  text-decoration: none; 
+  color: #e6e6e6;
+  text-decoration: none;
 }
 
 .footer-link:hover {
-  color: #6fae00;
+  color: #82BE00;
+  text-decoration: none;
 }
+
 
 
 /* RESPONSIVE DESIGN */

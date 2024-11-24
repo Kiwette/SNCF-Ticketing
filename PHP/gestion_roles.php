@@ -6,7 +6,8 @@ require_once('auth.php');
 check_admin();
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Récupérer la liste des rôles
 $query_roles = "SELECT * FROM roles";
@@ -33,6 +34,9 @@ if (isset($_POST['add_role'])) {
         $error_message = "Le nom du rôle ne peut pas être vide.";
     }
 }
+
+
+
 
 // Supprimer un rôle
 if (isset($_POST['delete_role'])) {

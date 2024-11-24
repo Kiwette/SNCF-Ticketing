@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Inclure la connexion à la base de données
-require 'config/db_connect.php';
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Message d'alerte à afficher
 $message = '';

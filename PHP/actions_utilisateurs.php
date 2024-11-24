@@ -3,7 +3,8 @@
 session_start();
 
 // Inclure la connexion à la base de données
-require_once 'config/db_connect.php';
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Vérifier si l'utilisateur est authentifié
 if (!isset($_SESSION['user_id'])) {

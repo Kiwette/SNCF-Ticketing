@@ -2,7 +2,8 @@
 session_start();
 require_once 'auth.php'; // Ajout du fichier auth.php pour vérifier l'authentification
 
-require_once 'config/db_connect.php';
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Vérification de l'envoi de données via le formulaire POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {

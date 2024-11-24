@@ -29,7 +29,7 @@
 
         <!-- Formulaire de création de ticket -->
         <div class="form-container">
-            <form action="page_creation_ticket.php" method="POST">
+            <form id="ticket-form" method="POST">
                 <h4>Création d'un Ticket</h4>
                 <hr>
 
@@ -85,6 +85,9 @@
                 <!-- Soumettre -->
                 <button type="submit">Créer le ticket</button>
             </form>
+
+            <!-- Zone pour afficher les messages de succès ou d'erreur -->
+            <div id="message"></div>
         </div>
 
         <!-- Footer -->
@@ -101,5 +104,36 @@
             </div>
         </footer>
     </section>
+
+    
+    <script>
+        // Gérer la soumission du formulaire de manière dynamique avec AJAX
+        document.getElementById('ticket-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Empêcher la soumission classique du formulaire
+
+            // Récupérer les données du formulaire
+            const formData = new FormData(this);
+
+            // Envoyer les données du formulaire via AJAX
+            fetch('page_creation_ticket.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('message').innerHTML = '<p>Ticket créé avec succès !</p>';
+                    document.getElementById('ticket-form').reset();  // Réinitialiser le formulaire
+                } else {
+                    document.getElementById('message').innerHTML = '<p>Erreur lors de la création du ticket.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                document.getElementById('message').innerHTML = '<p>Une erreur est survenue. Veuillez réessayer.</p>';
+            });
+        });
+    </script>
 </body>
+
 </html>

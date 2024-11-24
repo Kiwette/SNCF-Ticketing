@@ -1,12 +1,24 @@
 <?php
-// Démarrer la session
-session_start();
+// Démarrer la session avec des options plus sécurisées
+session_start([
+    'cookie_lifetime' => 86400, // Durée de vie du cookie (24 heures)
+    'cookie_secure' => true, // Assurez-vous que les cookies sont envoyés uniquement via HTTPS
+    'cookie_httponly' => true, // Empêcher l'accès aux cookies via JavaScript
+    'cookie_samesite' => 'Strict', // Restriction de l'accès au cookie uniquement sur le même site
+]);
+
+// Vérification du jeton CSRF (si nécessaire)
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Générer un jeton CSRF pour prévenir les attaques CSRF
+}
+
 
 // Inclure le fichier d'authentification
 require_once('auth.php'); // Vérification de la session, si l'utilisateur est déjà connecté, il sera redirigé
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

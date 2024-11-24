@@ -1,6 +1,7 @@
 <?php
 // Démarre la session pour suivre les informations sur l'utilisateur
 session_start();
+require 'mongo_manager.php'; // Inclure le gestionnaire MongoDB
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
@@ -27,19 +28,25 @@ include('/public/HTML/Page_acceuil.html');
 </head>
 <body>
 
-<!-- Optionnel : vous pouvez ajouter un message de bienvenue dynamique en fonction de l'utilisateur -->
+<!-- Message de bienvenue dynamique -->
 <div class="welcome-message">
     <h2>Bienvenue, <?php echo htmlspecialchars($user_role); ?> !</h2>
     <p>Vous êtes actuellement connecté en tant que <?php echo htmlspecialchars($user_role); ?>.</p>
 </div>
 
-<!-- Ajoutez ici un contenu dynamique comme des liens vers les différentes sections -->
+<!-- Navigation générale -->
 <nav>
     <ul>
         <li><a href="/PHP/tickets.php">Voir les Tickets</a></li>
-        <li><a href="/PHP/gestion_utilisateurs.php">Gérer les Utilisateurs</a></li>
+        
+        <!-- Affichage conditionnel pour l'administrateur -->
+        <?php if ($user_role === 'admin'): ?>
+            <li><a href="/PHP/gestion_utilisateurs.php">Gérer les Utilisateurs</a></li>
+        <?php endif; ?>
+
         <li><a href="/PHP/logout.php">Se déconnecter</a></li>
     </ul>
 </nav>
+
 </body>
 </html>

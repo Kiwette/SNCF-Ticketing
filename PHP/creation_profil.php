@@ -6,7 +6,8 @@ session_start();
 require_once('auth.php'); // Vérifie si l'utilisateur est connecté, sinon le redirige
 
 // Connexion à la base de données
-require_once('/config/db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données envoyées par le formulaire

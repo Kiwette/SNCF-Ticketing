@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Récupérer les informations de l'utilisateur depuis la session
 $user_id = $_SESSION['user_id'];
-$user_name = $_SESSION['user_name']; // Si tu as stocké le nom dans la session, sinon adapte cette ligne
+$user_name = $_SESSION['user_name']; 
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $user_name = $_SESSION['user_name']; // Si tu as stocké le nom dans la session,
             <p><strong>ID utilisateur :</strong> <?php echo htmlspecialchars($user_id); ?></p>
             <p><strong>Nom :</strong> <?php echo htmlspecialchars($user_name); ?></p>
             <p><strong>Adresse e-mail :</strong> <?php echo htmlspecialchars($_SESSION['user_email']); // Utiliser la variable session si elle est définie ?></p>
-            <p><strong>Rôle :</strong> <?php echo htmlspecialchars($_SESSION['user_role']); // Si tu as stocké le rôle dans la session ?></p>
+            <p><strong>Rôle :</strong> <?php echo htmlspecialchars($_SESSION['user_role']);  ?></p>
             <p><strong>Session ID :</strong> <?php echo session_id(); ?></p>
         </div>
 

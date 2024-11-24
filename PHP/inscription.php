@@ -2,106 +2,85 @@
 // Démarre la session
 session_start();
 
+// Inclure la connexion à la base de données
+require_once __DIR__ . '/app/config/Database.php';
+
 // Vérifier si l'utilisateur est déjà connecté
 if (isset($_SESSION['user_id'])) {
-    // Si l'utilisateur est connecté, rediriger vers la page d'accueil
     header("Location: /PHP/index.php");
     exit;
 }
 
-// Inclure la connexion à la base de données
-require_once('db_connect.php');
-
-// Vérifie si le formulaire a été soumis
+// Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Récupérer les données du formulaire
-    $nom = trim($_POST['nom']);
-    $prenom = trim($_POST['prenom']);
-    $mot_de_passe = trim($_POST['mot_de_passe']);
-    $confirm_mdp = trim($_POST['confirm_mdp']);
-    $role = $_POST['role']; // Récupérer le rôle de l'utilisateur (ex: 'Utilisateur' ou 'Administrateur')
     $num_cp = trim($_POST['num_cp']);
+    $mot_de_passe = trim($_POST['mot_de_passe']);
 
-    // Validation des champs
-    if (empty($nom) || empty($prenom) || empty($mot_de_passe) || empty($confirm_mdp) || empty($role) || empty($num_cp)) {
+    // Validation du champ num_cp
+    if (empty($num_cp) || empty($mot_de_passe)) {
         $error = "Tous les champs doivent être remplis.";
-    } elseif ($mot_de_passe !== $confirm_mdp) {
-        $error = "Les mots de passe ne correspondent pas.";
     } else {
-        // Sécuriser les données (par exemple, hachage du mot de passe)
-        $mot_de_passe_hache = password_hash($mot_de_passe, PASSWORD_BCRYPT);
-
-        // Préparer la requête pour vérifier si le numéro de CP existe déjà
+        // Préparer la requête pour récupérer l'utilisateur avec le numéro de CP
         $stmt = $pdo->prepare("SELECT * FROM table_utilisateur WHERE num_cp = ?");
         $stmt->execute([$num_cp]);
-        if ($stmt->rowCount() > 0) {
-            $error = "Ce numéro de CP est déjà utilisé.";
-        } else {
-            // Insérer l'utilisateur dans la base de données
-            $stmt = $pdo->prepare("INSERT INTO table_utilisateur (nom, prenom, mot_de_passe, role, num_cp) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$nom, $prenom, $mot_de_passe_hache, $role, $num_cp]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Si l'insertion est réussie, rediriger vers la page de connexion
-            $_SESSION['success'] = "Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.";
-            header("Location: connexion.php");
+        // Vérifier si l'utilisateur existe
+        if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
+            // Vérifier si le mot de passe doit être re-haché
+            if (password_needs_rehash($user['mot_de_passe'], PASSWORD_DEFAULT)) {
+                // Hacher à nouveau le mot de passe avec une méthode de hachage plus sécurisée
+                $new_hashed_password = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+
+                // Mettre à jour le mot de passe dans la base de données
+                $updateStmt = $pdo->prepare("UPDATE table_utilisateur SET mot_de_passe = ? WHERE num_cp = ?");
+                $updateStmt->execute([$new_hashed_password, $num_cp]);
+            }
+
+            // Si la vérification réussie, démarrer la session de l'utilisateur
+            $_SESSION['user_id'] = $user['id'];  // Assurez-vous que l'ID utilisateur existe
+            $_SESSION['role'] = $user['role'];
+            header("Location: /PHP/index.php");
             exit;
+        } else {
+            $error = "Numéro de CP ou mot de passe incorrect.";
         }
     }
 }
 ?>
 
-<!-- Page HTML pour l'inscription (formulaire) -->
+<!-- Formulaire de connexion HTML -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Création de Profil</title>
-    <link rel="stylesheet" href="/public/CSS/inscription.css">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="/public/CSS/connexion.css">
 </head>
 <body>
 
-    <h1>Créer un compte</h1>
-    
+    <h1>Se connecter</h1>
+
     <?php
     // Afficher les erreurs, si existantes
     if (isset($error)) {
         echo "<p style='color: red;'>$error</p>";
     }
-
-    // Afficher le message de succès s'il y en a un
-    if (isset($_SESSION['success'])) {
-        echo "<p style='color: green;'>".$_SESSION['success']."</p>";
-        unset($_SESSION['success']);
-    }
     ?>
 
-    <form action="inscription.php" method="POST">
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="nom" required>
-        
-        <label for="prenom">Prénom</label>
-        <input type="text" id="prenom" name="prenom" required>
-        
-        <label for="mot_de_passe">Mot de passe</label>
-        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-        
-        <label for="confirm_mdp">Confirmer le mot de passe</label>
-        <input type="password" id="confirm_mdp" name="confirm_mdp" required>
-        
-        <label for="role">Rôle</label>
-        <select id="role" name="role" required>
-            <option value="Utilisateur">Utilisateur</option>
-            <option value="Administrateur">Administrateur</option>
-        </select>
-        
+    <form action="connexion.php" method="POST">
         <label for="num_cp">Numéro de CP</label>
         <input type="text" id="num_cp" name="num_cp" required>
-        
-        <button type="submit">S'inscrire</button>
+
+        <label for="mot_de_passe">Mot de passe</label>
+        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+
+        <button type="submit">Se connecter</button>
     </form>
 
-    <p>Déjà un compte ? <a href="connexion.php">Se connecter</a></p>
+    <p>Pas encore de compte ? <a href="inscription.php">S'inscrire</a></p>
 
 </body>
 </html>

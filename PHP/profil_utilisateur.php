@@ -9,7 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Récupérer les informations de l'utilisateur
 $user_id = $_SESSION['user_id'];

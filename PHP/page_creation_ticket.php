@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Connexion à la base de données
-require_once 'config/db_connect.php';
+require_once __DIR__ . '/app/config/Database.php';
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Récupérer les données du formulaire

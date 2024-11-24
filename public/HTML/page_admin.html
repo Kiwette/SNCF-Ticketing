@@ -3,118 +3,91 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Administration - SNCF Ticketing</title>
-    <link rel="stylesheet" href="/public/CSS/page_admin.css" />
-    <link rel="stylesheet" href="/public/JS/admin.js" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <title>Gestion des tickets d'incidents - SNCF Ticketing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
   </head>
-
+  <link rel="stylesheet" href="/public/CSS/page_admin.css" />
   <body>
-    <section>
-      <header class="header">
-        <img class="logo_sncf" src="/Images/logo.news.png" alt="logo_sncf" />
-        <div class="presentation">
-          <h1 class="titre_principal"><span style="color: #82be00">S</span>NCF TICKETING</h1>
-        </div>
-        <nav class="nav">
-          <li><a href="/public/HTML/Page_accueil.html">Accueil</a></li>
-          <li><a href="/public/HTML/page_connexion.html">Se connecter</a></li>
-          <li><a href="/public/HTML/page_admin.html">Administration</a></li>
-        </nav>
-      </header>
+    <header class="header">
+      <img class="logo_sncf" src="/Images/logo.news.png" alt="logo SNCF" />
+      <div class="presentation">
+        <h1>SNCF TICKETING</h1>
+      </div>
+      <nav class="nav">
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Incidents</a></li>
+        <li><a href="#">Administration</a></li>
+      </nav>
+    </header>
 
-      <!-- Tableau de bord -->
+    <main>
       <div class="dashboard-container">
-        <h2 class="dashboard-title">Tableau de bord administrateur</h2>
-        
+        <h2 class="dashboard-title">Gestion des tickets d'incidents</h2>
         <div class="dashboard-stats">
           <div class="stat-box">
-            <h3>Utilisateurs</h3>
-            <p>150</p>
+            <h3>Tickets ouverts</h3>
+            <p>45</p>
           </div>
           <div class="stat-box">
-            <h3>Billets vendus</h3>
-            <p>1200</p>
+            <h3>Tickets résolus</h3>
+            <p>120</p>
           </div>
           <div class="stat-box">
-            <h3>Réservations en attente</h3>
-            <p>25</p>
+            <h3>Tickets en attente</h3>
+            <p>10</p>
           </div>
         </div>
 
-        <!-- Gestion des utilisateurs -->
-        <div class="manage-users">
-          <h3>Gérer les utilisateurs</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Rôle</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Jean Dupont</td>
-                <td>jean.dupont@example.com</td>
-                <td>Utilisateur</td>
-                <td>
-                  <button class="edit-btn">Modifier</button>
-                  <button class="delete-btn">Supprimer</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Marie Lefevre</td>
-                <td>marie.lefevre@example.com</td>
-                <td>Administrateur</td>
-                <td>
-                  <button class="edit-btn">Modifier</button>
-                  <button class="delete-btn">Supprimer</button>
-                </td>
-              </tr>
-              <!-- Autres utilisateurs -->
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Gestion des billets -->
-        <div class="manage-tickets">
-          <h3>Gérer les billets</h3>
-          <button class="add-ticket-btn">Ajouter un billet</button>
-          <button class="view-tickets-btn">Voir les billets</button>
-        </div>
-
-        <!-- Gestion des réservations -->
-        <div class="manage-reservations">
-          <h3>Réservations</h3>
-          <button class="view-reservations-btn">Voir les réservations</button>
-          <button class="confirm-reservations-btn">Confirmer réservations</button>
-        </div>
+        <h3>Liste des tickets</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Description</th>
+              <th>Statut</th>
+              <th>Priorité</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>Problème de connexion réseau</td>
+              <td><span class="status-open">Ouvert</span></td>
+              <td><span class="priority-high">Haute</span></td>
+              <td>
+                <button>Modifier</button>
+                <button>Résoudre</button>
+              </td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>Erreur sur Power BI Dashboard</td>
+              <td><span class="status-inprogress">En cours</span></td>
+              <td><span class="priority-medium">Moyenne</span></td>
+              <td>
+                <button>Modifier</button>
+                <button>Résoudre</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="add-ticket-btn">Créer un ticket</button>
+        <button class="view-reports-btn">Voir les rapports</button>
       </div>
+    </main>
 
-      <!-- FOOTER -->
-      <footer class="footer">
-        <img class="logo_sncf2" src="/Images/logo-removebg-preview.png" alt="logo SNCF" />
-        <div class="contenu_footer">
-          <h3>SNCF Ticketing |
-            <a href="/version.html" class="footer-link">Version 1.1</a> |
-            <a href="/public/HTML/cgu.html" class="footer-link">CGU</a> |
-            <a href="/mentions.html" class="footer-link">Mentions légales</a> |
-            <a href="/publicHTML/page_contacts.html" class="footer-link">Contactez-nous</a> |
-            e-SNCF ©2024
-          </h3>
-        </div>
-      </footer>
-    </section>
+    <footer class="footer">
+      <img class="logo_sncf2" src="/Images/logo-removebg-preview.png" alt="logo_sncf2"/>
+          <div class="contenu_footer">
+              <h3>SNCF Ticketing |
+                  <a href="/version.html"  class="footer-link">Version 1.1</a> |
+                  <a href="/public/HTML/cgu.html" class="footer-link">CGU</a> | 
+                  <a href="/public/HTML/mentions.html" class="footer-link">Mentions légales</a> | 
+                  <a href="/public/HTML/page_contacts.html" class="footer-link"> Contactez-nous</a>|
+                   e-SNCF ©2024 
+              </h3>
+          </div>
+  </footer>
   </body>
 </html>

@@ -6,7 +6,8 @@ require_once('auth.php');
 check_admin();
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Récupérer la liste des priorités à partir de la base de données
 $query = "SELECT * FROM priorites"; // Exemple de requête pour récupérer toutes les priorités

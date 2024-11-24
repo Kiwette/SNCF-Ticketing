@@ -8,7 +8,8 @@ require_once('auth.php');
 check_logged_in();
 
 // Inclure le fichier de connexion à la base de données
-require_once('db_connect.php');
+require_once __DIR__ . '/app/config/Database.php';
+
 
 // Enregistrer une nouvelle action dans l'historique
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ticket_id'], $_POST['action'], $_POST['ancienne_valeur'], $_POST['nouvelle_valeur'])) {
